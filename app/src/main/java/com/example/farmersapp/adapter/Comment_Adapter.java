@@ -19,6 +19,7 @@ import com.example.farmersapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
@@ -32,7 +33,7 @@ public class Comment_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private Context mContext;
     private List<Map<String, String>> items;
-    private CollectionReference collectionReferenceComment;
+    private CollectionReference collectionReferenceComment,collectionReferenceBlog;
 
     public static final String TAG = "checked";
 
@@ -41,6 +42,7 @@ public class Comment_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.mContext = mContext;
         this.items = items;
         collectionReferenceComment = FirebaseFirestore.getInstance().collection("Comment");
+        collectionReferenceBlog = FirebaseFirestore.getInstance().collection("Blog");
     }
 
     public Comment_Adapter() {
@@ -51,6 +53,7 @@ public class Comment_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.comment_item, parent, false);
+        mContext = parent.getContext();
 
         return new CommentViewHolder(view);
     }
@@ -82,6 +85,8 @@ public class Comment_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void onClick(View v) {
                     removeAt(position);
+
+
 
 
 
@@ -162,12 +167,39 @@ public class Comment_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public void removeAt(int position) {
-        String blogId = items.get(position).get("blogId");
+        final String blogId = items.get(position).get("blogId");
         items.remove(position);
 
         Map<String,Object> tempDataComment = new HashMap<>();
         tempDataComment.put("commentList",items);
         collectionReferenceComment.document(blogId).set(tempDataComment);
+
+        collectionReferenceBlog.document(blogId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            long commentCount;
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists())
+                {
+                    commentCount = documentSnapshot.getLong("comment");
+                    commentCount--;
+
+                    collectionReferenceBlog.document(blogId).update("comment",commentCount);
+                    Log.d(TAG,"comment delete count updated at firestore");
+
+                }
+                else {
+                    Log.d(TAG,"comment doesn't exist");
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(mContext,"problem with comment data",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, items.size());
     }
