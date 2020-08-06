@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardPreventCornerOverlap="true"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/informationImage_list"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:src="@drawable/test_success_story"
+                android:scaleType="fitXY"/>
+
+            <TextView
+                android:id="@+id/informationTitle_list"
+                android:layout_width="267dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/informationImage_list"
+                android:lines="3"
+                android:text="মাটির যত্ন কিভাবে নিতে হয়"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_next"
+                android:layout_toRightOf="@+id/informationTitle_list"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

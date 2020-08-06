@@ -1,50 +1,123 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp">
-
-
-   <RelativeLayout
-       android:id="@+id/item_container_cultivation"
-       android:layout_width="390dp"
-       android:layout_height="62dp"
-       android:layout_marginStart="24dp"
-       android:background="@color/card_bg_color"
-       android:paddingBottom="16dp"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintHorizontal_bias="0.0"
-       app:layout_constraintStart_toStartOf="parent">
-
-      <TextView
-
-          android:id="@+id/text_view_item_title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentStart="true"
-          android:layout_alignParentLeft="true"
-          android:layout_alignParentTop="true"
-          android:layout_marginStart="45dp"
-          android:layout_marginLeft="45dp"
-          android:layout_marginTop="3dp"
-          android:text="Simple Title Text "
-          android:textColor="@color/title_text_color"
-          android:textStyle="bold" />
-
-
-   </RelativeLayout>
+    android:orientation="horizontal">
 
    <ImageView
        android:id="@+id/image_view_item"
-       android:layout_width="48dp"
-       android:layout_height="63dp"
-       android:layout_marginStart="8dp"
-       android:layout_marginTop="16dp"
-       android:layout_marginEnd="8dp"
-       app:layout_constraintEnd_toStartOf="@+id/container"
-       app:layout_constraintStart_toStartOf="@+id/container"
-       app:layout_constraintTop_toTopOf="@+id/container"
+       android:layout_width="50dp"
+       android:layout_height="50dp"
+       android:layout_gravity="center_vertical"
        app:srcCompat="@mipmap/ic_launcher" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+   <LinearLayout
+       android:id="@+id/item_container_cultivation"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+      <com.wajahatkarim3.easyflipview.EasyFlipView
+          android:id="@+id/mEasyFlipView"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:flipOnTouch="false"
+          app:flipEnabled="true"
+          app:flipDuration="400"
+          app:flipType="vertical"
+          app:flipFrom="front"
+          app:autoFlipBack="true"
+          app:autoFlipBackTime="3000">
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="72dp"
+             android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/diseaseLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:padding="8dp"
+                android:background="@drawable/black_border"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true">
+
+               <ImageView
+                   android:id="@+id/dis_image"
+                   android:layout_width="20dp"
+                   android:layout_height="20dp"
+                   android:src="@drawable/disease_cultivation"
+                   android:layout_centerHorizontal="true"/>
+
+               <TextView
+                   android:layout_marginTop="5dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/disease_and_insects"
+                   android:textColor="#000"
+                   android:textAlignment="center"
+                   android:textSize="10sp"
+                   android:layout_below="@+id/dis_image"
+                   android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tipsLayout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:padding="8dp"
+                android:background="@drawable/black_border"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true">
+
+               <ImageView
+                   android:id="@+id/tips_image"
+                   android:layout_width="20dp"
+                   android:layout_height="20dp"
+                   android:src="@drawable/tips_cultivation"
+                   android:layout_centerHorizontal="true"/>
+
+               <TextView
+                   android:layout_marginTop="5dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/info_about_cultivation"
+                   android:textColor="#000"
+                   android:textAlignment="center"
+                   android:textSize="10sp"
+                   android:layout_below="@+id/tips_image"
+                   android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="72dp"
+             android:padding="10dp">
+
+            <TextView
+                android:id="@+id/text_view_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Simple Title Text "
+                android:textColor="#000"
+                android:textStyle="bold" />
+         </LinearLayout>
+
+
+      </com.wajahatkarim3.easyflipview.EasyFlipView>
+
+   </LinearLayout>
+
+
+
+</LinearLayout>

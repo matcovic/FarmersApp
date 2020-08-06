@@ -41,8 +41,8 @@
 
     <!--    String names for HomeFragment-->
     <string name="categories">ক্যাটেগরিস্</string>
-    <string name="information">শস্যের তালিকা</string>
-    <string name="cultivation">চাষাবাদের নিয়ম</string>
+    <string name="information">তথ্যকোষ</string>
+    <string name="cultivation">চাষাবাদ</string>
     <string name="poultry">পোল্ট্রি ফার্ম</string>
     <string name="suggestions">পরামর্শ</string>
     <string name="disease">শস্যের রোগসনাক্ত</string>
@@ -237,6 +237,8 @@
     <string name="address_fordetails">সরঞ্জামের ঠিকানা</string>
     <string name="more_fordetails">আরও...</string>
     <string name="info_instrument">সরঞ্জামের তথ্য</string>
+    <string name="disease_and_insects">রোগবালাই</string>
+    <string name="info_about_cultivation">চাষাবাদ সংক্রান্ত টিপস</string>
 
 
 </resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cultivation_Disease_DetailsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/diseaseTitle_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="জাবপোকা"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/diseaseImage_details"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@+id/diseaseTitle_details"
+                android:src="@drawable/test_success_story"
+                android:scaleType="fitXY"
+
+                android:layout_marginBottom="15dp"/>
+
+            <TextView
+                android:id="@+id/diseaseArticle_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Article on the disease"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_below="@+id/diseaseImage_details"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
