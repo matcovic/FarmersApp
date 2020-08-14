@@ -168,8 +168,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        sendUserhome();
-
+//                        sendUserhome();
+                        sendUserToDataLoadActivity();
                         Toast.makeText(RegistrationActivity.this, "You are registered!", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -192,33 +192,13 @@ public class RegistrationActivity extends AppCompatActivity {
         finish();
     }
 
-    public String digitConversionEngToBangla(int value) {
-        StringBuilder result = new StringBuilder();
-        String temp = Integer.toString(value);
-
-        for(int i = 0; i<temp.length(); i++) {
-            if(temp.charAt(i) == '0')
-                result.append("০");
-            else if(temp.charAt(i) == '1')
-                result.append("১");
-            else if(temp.charAt(i) == '2')
-                result.append("২");
-            else if(temp.charAt(i) == '3')
-                result.append("৩");
-            else if(temp.charAt(i) == '4')
-                result.append("৪");
-            else if(temp.charAt(i) == '5')
-                result.append("৫");
-            else if(temp.charAt(i) == '6')
-                result.append("৬");
-            else if(temp.charAt(i) == '7')
-                result.append("৭");
-            else if(temp.charAt(i) == '8')
-                result.append("৮");
-            else if(temp.charAt(i) == '9')
-                result.append("৯");
-        }
-        return result.toString();
+    private void sendUserToDataLoadActivity()
+    {
+        Intent dataLoadIntent= new Intent(RegistrationActivity.this,DataLoadActivity.class);
+        startActivity(dataLoadIntent);
+        finish();
     }
+
+
 
 }

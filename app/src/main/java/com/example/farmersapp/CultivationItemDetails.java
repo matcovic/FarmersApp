@@ -53,8 +53,8 @@ public class CultivationItemDetails extends Fragment {
                              Bundle savedInstanceState) {
         View contextView = inflater.inflate(R.layout.fragment_cultivation_item_details, container, false);
 
-      textViewData = contextView.findViewById(R.id.textView_data);
-      textViewData.setText(getArguments().getString("pass"));
+        textViewData = contextView.findViewById(R.id.textView_data);
+        textViewData.setText(getArguments().getString("pass"));
         return contextView;
     }
 }

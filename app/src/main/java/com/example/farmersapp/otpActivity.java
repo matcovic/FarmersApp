@@ -121,6 +121,13 @@ public class otpActivity extends AppCompatActivity {
         finish();
     }
 
+    private void sendUserToDataLoadActivity()
+    {
+        Intent dataLoadIntent= new Intent(otpActivity.this,DataLoadActivity.class);
+        startActivity(dataLoadIntent);
+        finish();
+    }
+
 
     private void registerPage() {
         Log.d("Print", "9");
@@ -156,7 +163,10 @@ public class otpActivity extends AppCompatActivity {
                             currentUserApi.setPhoneNumber(document.getString("logedInPhoneNumber"));
                             currentUserApi.setName(document.getString("name"));
                             currentUserApi.setUserId(document.getString("userUId"));
-                            senduserHome();
+
+                            //                        sendUserhome();
+                            sendUserToDataLoadActivity();
+
                             check = true;
                             break;
                         }

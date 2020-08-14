@@ -240,6 +240,12 @@
     <string name="info_instrument">সরঞ্জামের তথ্য</string>
     <string name="disease_and_insects">রোগবালাই</string>
     <string name="info_about_cultivation">চাষাবাদ সংক্রান্ত টিপস</string>
+    <string name="chara_ropon_dhap">চারা রোপণ ধাপ</string>
+    <string name="udhvidh_bordhon_dhap">উদ্ভিদের বর্ধনসাধক ধাপ</string>
+    <string name="pushpo_dhap">পুষ্পোদ্গম ধাপ</string>
+    <string name="folon_dhap">ফলন ধাপ</string>
+    <string name="fosol_katar_dhap">ফসল কাটার ধাপ</string>
+
 
 
 </resources>
