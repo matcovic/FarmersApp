@@ -96,41 +96,6 @@
             android:layout_margin="12dp">
 
             <LinearLayout
-                android:id="@+id/click_cropNutrition"
-                android:padding="12dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/nutrition"
-                    android:scaleType="fitXY"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="ফসলের পুষ্টি"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"/>
-
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            app:cardElevation="6dp"
-            app:cardCornerRadius="12dp"
-            android:layout_margin="12dp">
-
-            <LinearLayout
                 android:id="@+id/click_insects"
                 android:padding="12dp"
                 android:gravity="center"
@@ -166,7 +131,7 @@
             android:layout_margin="12dp">
 
             <LinearLayout
-                android:id="@+id/click_technology"
+                android:id="@+id/click_cropNutrition"
                 android:padding="12dp"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -176,13 +141,13 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/modern_technology"
+                    android:src="@drawable/nutrition"
                     android:scaleType="fitXY"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="প্রযুক্তি"
+                    android:text="ফসলের পুষ্টি"
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
 
@@ -218,6 +183,41 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="বালাইনাশক"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp">
+
+            <LinearLayout
+                android:id="@+id/click_technology"
+                android:padding="12dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/modern_technology"
+                    android:scaleType="fitXY"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="প্রযুক্তি"
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
 

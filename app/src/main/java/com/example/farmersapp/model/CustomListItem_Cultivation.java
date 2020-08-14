@@ -3,27 +3,26 @@ package com.example.farmersapp.model;
 public class CustomListItem_Cultivation {
 
 
-    String Title;
-    int userPhoto;
+     public String nameBangla;
+     public String nameEnglish;
+     public String userPhoto;
 
-    public CustomListItem_Cultivation(String title, int userPhoto) {
-        Title = title;
+    public CustomListItem_Cultivation(String nameBangla, String nameEnglish, String userPhoto) {
+        this.nameBangla = nameBangla;
+        this.nameEnglish = nameEnglish;
         this.userPhoto = userPhoto;
     }
 
-    public String getTitle() {
-        return Title;
+
+    public String getNameBangla() {
+        return nameBangla;
     }
 
-    public void setTitle(String title) {
-        Title = title;
+    public String getNameEnglish() {
+        return nameEnglish;
     }
 
-    public int getUserPhoto() {
+    public String getUserPhoto() {
         return userPhoto;
-    }
-
-    public void setUserPhoto(int userPhoto) {
-        this.userPhoto = userPhoto;
     }
 }
