@@ -143,15 +143,15 @@ public class RegistrationActivity extends AppCompatActivity {
         user.put("logedInPhoneNumber", phoneNumber);
         user.put("userUId",mUid);
         user.put("marketProductList",list);
-       // user.put("userId",mUser.toString());
+        // user.put("userId",mUser.toString());
         Log.d("checked","register activity"+phoneNumber+"  ");
 
         db.collection("users").document(mUid).set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        sendUserhome();
-
+//                        sendUserhome();
+                        sendUserToDataLoadActivity();
                         Toast.makeText(RegistrationActivity.this, "You are registered!", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -173,6 +173,14 @@ public class RegistrationActivity extends AppCompatActivity {
         startActivity(homeIntent);
         finish();
     }
+
+    private void sendUserToDataLoadActivity()
+    {
+        Intent dataLoadIntent= new Intent(RegistrationActivity.this,DataLoadActivity.class);
+        startActivity(dataLoadIntent);
+        finish();
+    }
+
 
 
 }
