@@ -51,6 +51,7 @@ public class DataLoadActivity extends AppCompatActivity {
     public static final String CROPS_MODEL = "CropsModel";
     public static final String DISEASES_MODEL = "DiseasesModel";
     public static final String CULTIVATION_ITEMS = "cultivationItems";
+    public static final String DATA_DISEASE = "dataDisease";
 
     ProgressBar progressBarDataLoad;
 

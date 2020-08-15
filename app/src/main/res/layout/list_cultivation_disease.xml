@@ -6,6 +6,7 @@
     android:padding="5dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_listItemDisease"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="10dp"
@@ -14,7 +15,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="5dp">
 
             <ImageView
@@ -26,8 +27,8 @@
 
             <TextView
                 android:id="@+id/diseaseTitle_list"
-                android:layout_width="267dp"
-                android:layout_height="60dp"
+                android:layout_width="229dp"
+                android:layout_height="67dp"
                 android:layout_marginStart="8dp"
                 android:layout_toEndOf="@+id/diseaseImage_list"
                 android:lines="3"
@@ -35,11 +36,17 @@
                 android:textColor="#000"
                 android:textSize="14sp" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/next_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="-2dp"
+                android:layout_toEndOf="@+id/diseaseTitle_list"
                 android:layout_toRightOf="@+id/diseaseTitle_list"
                 android:src="@drawable/ic_next" />
 
