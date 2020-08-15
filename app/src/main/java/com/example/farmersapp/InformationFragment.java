@@ -62,6 +62,10 @@ public class InformationFragment extends Fragment {
         click_technology = convertView.findViewById(R.id.click_technology);
         click_medicine = convertView.findViewById(R.id.click_medicine);
 
+
+
+
+
         return convertView;
     }
 }

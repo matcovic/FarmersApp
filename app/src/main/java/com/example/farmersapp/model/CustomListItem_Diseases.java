@@ -1,6 +1,9 @@
 package com.example.farmersapp.model;
 
-public class CustomListItem_Diseases  {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CustomListItem_Diseases implements Parcelable {
 
     String diseaseBiologicalControl;
     String diseaseBrief;
@@ -23,6 +26,30 @@ public class CustomListItem_Diseases  {
         this.diseaseId = diseaseId;
         this.diseasePhoto = diseasePhoto;
     }
+
+    protected CustomListItem_Diseases(Parcel in) {
+        diseaseBiologicalControl = in.readString();
+        diseaseBrief = in.readString();
+        diseaseCause = in.readString();
+        diseaseChemicalControl = in.readString();
+        diseaseScientificName = in.readString();
+        diseaseTitle = in.readString();
+        diseaseType = in.readString();
+        diseaseId = in.readString();
+        diseasePhoto = in.readString();
+    }
+
+    public static final Creator<CustomListItem_Diseases> CREATOR = new Creator<CustomListItem_Diseases>() {
+        @Override
+        public CustomListItem_Diseases createFromParcel(Parcel in) {
+            return new CustomListItem_Diseases(in);
+        }
+
+        @Override
+        public CustomListItem_Diseases[] newArray(int size) {
+            return new CustomListItem_Diseases[size];
+        }
+    };
 
     public String getDiseaseBiologicalControl() {
         return diseaseBiologicalControl;
@@ -58,5 +85,23 @@ public class CustomListItem_Diseases  {
 
     public String getDiseasePhoto() {
         return diseasePhoto;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(diseaseBiologicalControl);
+        dest.writeString(diseaseBrief);
+        dest.writeString(diseaseCause);
+        dest.writeString(diseaseChemicalControl);
+        dest.writeString(diseaseScientificName);
+        dest.writeString(diseaseTitle);
+        dest.writeString(diseaseType);
+        dest.writeString(diseaseId);
+        dest.writeString(diseasePhoto);
     }
 }

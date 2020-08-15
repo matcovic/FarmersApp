@@ -8,187 +8,189 @@
     tools:context=".Cultivation_FarmingInfoFragment"
     android:padding="5dp">
 
-    <GridLayout
-        android:rowCount="3"
-        android:columnCount="2"
-        android:alignmentMode="alignMargins"
-        android:columnOrderPreserved="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <GridLayout
+            android:rowCount="3"
+            android:columnCount="2"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            app:cardElevation="6dp"
-            app:cardCornerRadius="12dp"
-            android:layout_margin="12dp">
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp">
 
-            <LinearLayout
-                android:id="@+id/click_landSelection"
-                android:padding="12dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/click_landSelection"
+                    android:padding="12dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/land_selection"
-                    android:scaleType="fitXY"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="স্থান নির্বাচন"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            app:cardElevation="6dp"
-            app:cardCornerRadius="12dp"
-            android:layout_margin="12dp">
-
-            <LinearLayout
-                android:id="@+id/click_landPreparation"
-                android:padding="12dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/land_preparation"
-                    android:scaleType="fitXY"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="মাঠ প্রস্তুতি"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/land_selection"
+                        android:scaleType="fitXY"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="স্থান নির্বাচন"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            app:cardElevation="6dp"
-            app:cardCornerRadius="12dp"
-            android:layout_margin="12dp">
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp">
 
-            <LinearLayout
-                android:id="@+id/click_cropSelection"
-                android:padding="12dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/click_landPreparation"
+                    android:padding="12dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/crop_selection"
-                    android:scaleType="fitXY"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="উদ্ভিদ নির্বাচন"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            app:cardElevation="6dp"
-            app:cardCornerRadius="12dp"
-            android:layout_margin="12dp">
-
-            <LinearLayout
-                android:id="@+id/click_cropPlant"
-                android:padding="12dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/plantation"
-                    android:scaleType="fitXY"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="রোপণ"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/land_preparation"
+                        android:scaleType="fitXY"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="মাঠ প্রস্তুতি"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            app:cardElevation="6dp"
-            app:cardCornerRadius="12dp"
-            android:layout_margin="12dp">
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp">
 
-            <LinearLayout
-                android:id="@+id/click_cropCare"
-                android:padding="12dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/click_cropSelection"
+                    android:padding="12dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/takecare_of_crop"
-                    android:scaleType="fitXY"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="পরিচর্যা"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/crop_selection"
+                        android:scaleType="fitXY"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="উদ্ভিদ নির্বাচন"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
 
 
+                </LinearLayout>
 
-    </GridLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp">
+
+                <LinearLayout
+                    android:id="@+id/click_cropPlant"
+                    android:padding="12dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/plantation"
+                        android:scaleType="fitXY"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="রোপণ"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp">
+
+                <LinearLayout
+                    android:id="@+id/click_cropCare"
+                    android:padding="12dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/takecare_of_crop"
+                        android:scaleType="fitXY"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="পরিচর্যা"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </GridLayout>
+
+
 
 </LinearLayout>
