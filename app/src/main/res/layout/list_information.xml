@@ -7,11 +7,12 @@
     android:padding="5dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_listItemInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardPreventCornerOverlap="true"
         app:cardElevation="10dp"
-        app:cardMaxElevation="10dp">
+        app:cardMaxElevation="10dp"
+        app:cardPreventCornerOverlap="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -22,8 +23,8 @@
                 android:id="@+id/informationImage_list"
                 android:layout_width="100dp"
                 android:layout_height="70dp"
-                android:src="@drawable/test_success_story"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/test_success_story" />
 
             <TextView
                 android:id="@+id/informationTitle_list"
@@ -34,14 +35,14 @@
                 android:lines="3"
                 android:text="মাটির যত্ন কিভাবে নিতে হয়"
                 android:textColor="#000"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_next"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/informationTitle_list"
-                android:layout_centerVertical="true"/>
+                android:src="@drawable/ic_next" />
 
         </RelativeLayout>
 

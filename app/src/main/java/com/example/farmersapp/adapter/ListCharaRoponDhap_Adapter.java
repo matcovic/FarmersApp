@@ -8,24 +8,22 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.farmersapp.CommentsFragment;
 import com.example.farmersapp.Cultivation_Disease_DetailsFragment;
+import com.example.farmersapp.DataLoadActivity;
 import com.example.farmersapp.R;
 import com.example.farmersapp.model.CustomListItem_Diseases;
-import com.example.farmersapp.model.DiseasesModel;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -63,15 +61,15 @@ public class ListCharaRoponDhap_Adapter  extends RecyclerView.Adapter<ListCharaR
         Bitmap bmp = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
         holder.diseaseImage.setImageBitmap(bmp);
 
-        holder.nextButton.setOnClickListener(new View.OnClickListener() {
+        holder.listItemCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Fragment fragment = new Cultivation_Disease_DetailsFragment();
                 Bundle args = new Bundle();
-                args.putSerializable("dataDisease",(Serializable)data);
+                args.putParcelable(DataLoadActivity.DATA_DISEASE,  data);
                 fragment.setArguments(args);
-                FragmentManager fragmentManager = ((FragmentActivity)holder.nextButton.getContext()).getSupportFragmentManager();
+                FragmentManager fragmentManager = ((FragmentActivity)holder.listItemCardView.getContext()).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
                 fragmentTransaction.replace(R.id.container, fragment);
@@ -93,8 +91,7 @@ public class ListCharaRoponDhap_Adapter  extends RecyclerView.Adapter<ListCharaR
      static class ListCharaRoponDhap_ViewHolder extends RecyclerView.ViewHolder{
         ImageView diseaseImage;
         TextView diseaseTitle;
-        ImageButton nextButton;
-
+         CardView listItemCardView;
 
 
         public ListCharaRoponDhap_ViewHolder(@NonNull View itemView) {
@@ -102,7 +99,8 @@ public class ListCharaRoponDhap_Adapter  extends RecyclerView.Adapter<ListCharaR
 
             diseaseImage = itemView.findViewById(R.id.diseaseImage_list);
             diseaseTitle = itemView.findViewById(R.id.diseaseTitle_list);
-            nextButton = itemView.findViewById(R.id.next_button);
+            listItemCardView = itemView.findViewById(R.id.cardView_listItemDisease);
+
 
 
 
