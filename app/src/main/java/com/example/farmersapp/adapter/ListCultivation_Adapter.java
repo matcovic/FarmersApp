@@ -206,7 +206,6 @@ public class ListCultivation_Adapter extends RecyclerView.Adapter<ListCultivatio
 
                         args.putString("pass", INFO_PAGE);
                         itemFragment.setArguments(args);
-
                         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
                         fragmentTransaction.replace(R.id.container, itemFragment);
                         fragmentTransaction.addToBackStack(null);
