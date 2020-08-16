@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,10 @@ public class Cultivation_FarmingInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.d("check","cultivation farming info");
+
         View convertView = inflater.inflate(R.layout.fragment_cultivation_farming_info, container, false);
+
 
         //Invoking Button
         click_landSelection = convertView.findViewById(R.id.click_landSelection);
