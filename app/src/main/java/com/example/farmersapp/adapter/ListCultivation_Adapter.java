@@ -21,7 +21,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.farmersapp.AddNewInstrumentFragment;
 import com.example.farmersapp.CultivationItemDetails;
+import com.example.farmersapp.Cultivation_FarmingInfoFragment;
 import com.example.farmersapp.R;
 import com.example.farmersapp.model.CustomListItem_Cultivation;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
@@ -170,25 +172,12 @@ public class ListCultivation_Adapter extends RecyclerView.Adapter<ListCultivatio
                     }
                     break;
                 case R.id.tipsLayout:
-                    if(itemFragment!=null) {
+                    Fragment fragment = new Cultivation_FarmingInfoFragment();
+                    FragmentManager fragmentManager = ((FragmentActivity)mContext).getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.container, fragment);
+                    fragmentTransaction.addToBackStack(null);
 
-                        FragmentManager fragmentManager = ((FragmentActivity)mContext).getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                        Bundle args = new Bundle();
-
-                        args.putString("pass", title.getText().toString()+" "+"Cultivation tips");
-                        itemFragment.setArguments(args);
-
-                        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
-                        fragmentTransaction.replace(R.id.container, itemFragment);
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
-                    }
-                    else
-                    {
-                        Log.d("error","null exception");
-                    }
                     break;
             }
 

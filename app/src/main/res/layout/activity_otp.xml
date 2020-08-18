@@ -4,41 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center|top"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".otpActivity">
 
 
     <TextView
-        android:layout_width="379dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/otp_info_text"
-        android:textColor="@color/color_title_text_view"
-        android:textSize="18sp" />
-
-    <EditText
-        android:id="@+id/verificattion_code_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp"
-        android:backgroundTint="@android:color/black"
-        android:hint="@string/otp_hint"
-        android:inputType="number"
+        android:text="@string/otp_info_text"
         android:textColor="@color/color_title_text_view"
-        android:textColorHint="@color/content_text_color"
-        android:textSize="20sp" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_margin="20dp"/>
 
-    <Button
-        android:id="@+id/Button_otp"
-        android:layout_width="363dp"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:theme="@style/TextInputLayoutWithPrimaryColor"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/black"
-        android:text="@string/otp_confirmText"
-        android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        android:hint="@string/otp_hint"
+        android:layout_margin="40dp">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/verificattion_code_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:textSize="18sp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
         android:id="@+id/otp_progress_bar"
@@ -50,6 +45,20 @@
         android:layout_marginTop="10dp"
         android:indeterminateDrawable="@drawable/proressbardialog"
         android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_marginTop="70dp"
+        android:id="@+id/Button_otp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/otp_confirmText"
+        android:textSize="18sp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:theme="@style/LoginButton"
+        app:cornerRadius="16dp"/>
+
+
+
 
 
 </LinearLayout>
