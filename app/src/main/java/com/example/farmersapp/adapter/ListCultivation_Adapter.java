@@ -28,11 +28,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.farmersapp.CultivationItemDetails;
 import com.example.farmersapp.Cultivation_DiseaseFragment;
 import com.example.farmersapp.Cultivation_FarmingInfoFragment;
+import com.example.farmersapp.DataLoadActivity;
 import com.example.farmersapp.R;
 import com.example.farmersapp.model.CropsModel;
 import com.example.farmersapp.model.CustomListItem_Cultivation;
 import com.example.farmersapp.model.CustomListItem_DiseaseCategories;
 import com.example.farmersapp.model.CustomListItem_Diseases;
+import com.example.farmersapp.model.CustomListItem_Tips;
 import com.example.farmersapp.model.DiseaseCategoriesModel;
 import com.example.farmersapp.model.DiseasesModel;
 import com.example.farmersapp.util.GlideApp;
@@ -42,8 +44,10 @@ import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
@@ -56,17 +60,30 @@ public class ListCultivation_Adapter extends RecyclerView.Adapter<ListCultivatio
     Map<String, CustomListItem_Diseases> diseasesModelMap;
     Map<String, CustomListItem_DiseaseCategories> diseaseCategoriesModelMap;
 
+    Map<String, CustomListItem_Tips> landPreparationTipsMap;
+    Map<String, CustomListItem_Tips> landSelectionTipsMap;
+    Map<String, CustomListItem_Tips> cropSelectionTipsMap;
+    Map<String, CustomListItem_Tips> cropCareTipsMap;
+    Map<String, CustomListItem_Tips> cropPlantTipsMap;
 
-    public static final String DISEASE_PAGE = "disease";
-    public static final String INFO_PAGE = "info";
 
-    public ListCultivation_Adapter(Context mContext, List<CustomListItem_Cultivation> mData, Map<String, CustomListItem_Diseases> diseasesModelMap, Map<String, CustomListItem_DiseaseCategories> diseaseCategoriesModelMap) {
+    public static final String DISEASE_PAGE = "Data is not exist";
+    public static final String INFO_PAGE = "Data is not exist";
+
+    public ListCultivation_Adapter(Context mContext, List<CustomListItem_Cultivation> mData, Map<String, CustomListItem_Diseases> diseasesModelMap, Map<String, CustomListItem_DiseaseCategories> diseaseCategoriesModelMap, Map<String, CustomListItem_Tips> cropCareTipsMap, Map<String, CustomListItem_Tips> cropPlantTipsMap, Map<String, CustomListItem_Tips> cropSelectionTipsMap, Map<String, CustomListItem_Tips> landPreparationTipsMap, Map<String, CustomListItem_Tips> landSelectionTipsMap) {
         this.mContext = mContext;
         this.mData = mData;
         this.mDataFiltered = mData;
         this.diseasesModelMap = diseasesModelMap;
         this.diseaseCategoriesModelMap = diseaseCategoriesModelMap;
+        this.landPreparationTipsMap = landPreparationTipsMap;
+        this.landSelectionTipsMap = landSelectionTipsMap;
+        this.cropCareTipsMap = cropCareTipsMap;
+        this.cropPlantTipsMap = cropPlantTipsMap;
+        this.cropSelectionTipsMap = cropSelectionTipsMap;
+
     }
+
 
     @Override
     public Filter getFilter() {
@@ -157,10 +174,11 @@ public class ListCultivation_Adapter extends RecyclerView.Adapter<ListCultivatio
             mEasyFlipView = itemView.findViewById(R.id.mEasyFlipView);
             tipsButton = itemView.findViewById(R.id.tipsLayout);
             diseaseButton = itemView.findViewById(R.id.diseaseLayout);
-
             itemView.setOnClickListener(this);
             diseaseButton.setOnClickListener(this);
             tipsButton.setOnClickListener(this);
+
+
         }
 
         @Override
@@ -172,8 +190,12 @@ public class ListCultivation_Adapter extends RecyclerView.Adapter<ListCultivatio
 
             switch (v.getId()) {
                 case R.id.diseaseLayout:
-                    Fragment itemFragment = Cultivation_DiseaseFragment.newInstance("", "");
-                    if (itemFragment != null) {
+
+                    if(diseaseCategoriesModelMap.containsKey(item.getNameEnglish())) {
+
+
+                        Fragment itemFragment = Cultivation_DiseaseFragment.newInstance("", "");
+
                         FragmentManager fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -191,27 +213,62 @@ public class ListCultivation_Adapter extends RecyclerView.Adapter<ListCultivatio
                         fragmentTransaction.replace(R.id.container, itemFragment);
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
-                    } else {
-                        Log.d("error", "null exception");
                     }
-                    break;
-                case R.id.tipsLayout:
-                    itemFragment = Cultivation_FarmingInfoFragment.newInstance("", "");
-                    if (itemFragment != null) {
-
-                        FragmentManager fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
+                    else {
+                        Fragment  itemFragment = CultivationItemDetails.newInstance("", "");
+                        FragmentManager  fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        Bundle  args = new Bundle();
+                        args.putString("pass", DISEASE_PAGE);
 
-                        Bundle args = new Bundle();
-
-                        args.putString("pass", INFO_PAGE);
                         itemFragment.setArguments(args);
                         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
                         fragmentTransaction.replace(R.id.container, itemFragment);
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
+                    }
+
+                break;
+                case R.id.tipsLayout:
+
+
+                    if (landPreparationTipsMap.containsKey(item.getNameEnglish()) && landSelectionTipsMap.containsKey(item.getNameEnglish()) && cropCareTipsMap.containsKey(item.getNameEnglish()) && cropPlantTipsMap.containsKey(item.getNameEnglish()) && cropSelectionTipsMap.containsKey(item.getNameEnglish())) {
+
+
+                        Fragment itemFragment = Cultivation_FarmingInfoFragment.newInstance();
+
+                        FragmentManager  fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
+                        FragmentTransaction   fragmentTransaction = fragmentManager.beginTransaction();
+
+                        Bundle  args = new Bundle();
+                        args.putParcelable(DataLoadActivity.LAND_PREPARATION_TIPS, landPreparationTipsMap.get(item.getNameEnglish()));
+                        args.putParcelable(DataLoadActivity.LAND_SELECTION_TIPS, landSelectionTipsMap.get(item.getNameEnglish()));
+                        args.putParcelable(DataLoadActivity.CROP_SELECTION_TIPS, cropSelectionTipsMap.get(item.getNameEnglish()));
+                        args.putParcelable(DataLoadActivity.CROP_CARE_TIPS, cropCareTipsMap.get(item.getNameEnglish()));
+                        args.putParcelable(DataLoadActivity.CROP_PLANT_TIPS, cropCareTipsMap.get(item.getNameEnglish()));
+
+
+                        itemFragment.setArguments(args);
+                        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
+                        fragmentTransaction.replace(R.id.container, itemFragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+
                     } else {
-                        Log.d("error", "null exception");
+
+                        Fragment  itemFragment = CultivationItemDetails.newInstance("", "");
+
+                        FragmentManager  fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        Bundle  args = new Bundle();
+                        args.putString("pass", INFO_PAGE);
+
+                        itemFragment.setArguments(args);
+                        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
+                        fragmentTransaction.replace(R.id.container, itemFragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+
                     }
                     break;
             }
