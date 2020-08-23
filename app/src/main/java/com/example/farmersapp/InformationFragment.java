@@ -64,8 +64,6 @@ public class InformationFragment extends Fragment {
 
 
 
-
-
         return convertView;
     }
 }

@@ -21,8 +21,12 @@ import com.example.farmersapp.adapter.ListCultivation_Adapter;
 import com.example.farmersapp.model.CustomListItem_Cultivation;
 import com.example.farmersapp.model.CustomListItem_DiseaseCategories;
 import com.example.farmersapp.model.CustomListItem_Diseases;
+import com.example.farmersapp.model.CustomListItem_Market;
+import com.example.farmersapp.model.CustomListItem_Tips;
+import com.example.farmersapp.model.TipsModel;
 import com.example.farmersapp.model.DiseaseCategoriesModel;
 import com.example.farmersapp.model.DiseasesModel;
+import com.example.farmersapp.model.TipsModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -45,6 +49,13 @@ public class CultivationFragment extends Fragment {
     CharSequence search = "";
     List<CustomListItem_DiseaseCategories> mDataDiseaseCategoriesModel;
     List<CustomListItem_Diseases> mDataDiseases;
+
+    List<TipsModel> mDataCropPlantTips;
+    List<TipsModel> mDataCropSelectionTips;
+    List<TipsModel> mDataCropCareTips;
+    List<TipsModel> mDataLandSelectionTips;
+    List<TipsModel> mDataLandPreparationTips;
+
 
 
     public static CultivationFragment newInstance() {
@@ -98,12 +109,101 @@ public class CultivationFragment extends Fragment {
             diseasesModelMap.put(i.getDiseaseId(), i);
         }
 
+        type = new TypeToken<List<TipsModel>>() {
+        }.getType();
+        gson = new Gson();
+        json = sharedPreferences.getString(DataLoadActivity.CROP_PLANT_TIPS, "");
+        mDataCropPlantTips = gson.fromJson(json, type);
+        Log.d("check tips data", String.valueOf(mDataCropPlantTips.size()));
+        Map<String, CustomListItem_Tips> cropPlantTipsMap = new HashMap<>();
+        for (TipsModel i : mDataCropPlantTips) {
+
+            Log.d("check" ,i.getTipsBrief());
+
+            CustomListItem_Tips tips = new CustomListItem_Tips(i.getTipsPhoto(),i.getTipsBrief(),i.getTipsId());
+            cropPlantTipsMap.put(i.getTipsId(), tips);
+        }
+
+
+
+        type = new TypeToken<List<TipsModel>>() {
+        }.getType();
+        gson = new Gson();
+        json = sharedPreferences.getString(DataLoadActivity.CROP_CARE_TIPS, "");
+        mDataCropCareTips = gson.fromJson(json, type);
+        Log.d("check tips data", String.valueOf(mDataCropCareTips.size()));
+        Map<String, CustomListItem_Tips> cropCareTipsMap = new HashMap<>();
+        for (TipsModel i : mDataCropCareTips) {
+
+            Log.d("check" ,i.getTipsBrief());
+
+            CustomListItem_Tips tips = new CustomListItem_Tips(i.getTipsPhoto(),i.getTipsBrief(),i.getTipsId());
+
+            cropCareTipsMap.put(i.getTipsId(), tips);
+        }
+
+
+        type = new TypeToken<List<TipsModel>>() {
+        }.getType();
+        gson = new Gson();
+        json = sharedPreferences.getString(DataLoadActivity.CROP_SELECTION_TIPS, "");
+        mDataCropSelectionTips = gson.fromJson(json, type);
+        Log.d("check tips data", String.valueOf(mDataCropSelectionTips.size()));
+        Map<String, CustomListItem_Tips> cropSelectionTipsMap = new HashMap<>();
+        for (TipsModel i : mDataCropSelectionTips) {
+
+            Log.d("check" ,i.getTipsBrief());
+
+            CustomListItem_Tips tips = new CustomListItem_Tips(i.getTipsPhoto(),i.getTipsBrief(),i.getTipsId());
+
+            cropSelectionTipsMap.put(i.getTipsId(), tips);
+        }
+
+
+        type = new TypeToken<List<TipsModel>>() {
+        }.getType();
+        gson = new Gson();
+        json = sharedPreferences.getString(DataLoadActivity.LAND_SELECTION_TIPS, "");
+        mDataLandSelectionTips = gson.fromJson(json, type);
+        Log.d("check tips data", String.valueOf(mDataLandSelectionTips.size()));
+        Map<String, CustomListItem_Tips> landSelectionTipsMap = new HashMap<>();
+        for (TipsModel i : mDataLandSelectionTips) {
+
+            Log.d("check" ,i.getTipsBrief());
+            CustomListItem_Tips tips = new CustomListItem_Tips(i.getTipsPhoto(),i.getTipsBrief(),i.getTipsId());
+
+            landSelectionTipsMap.put(i.getTipsId(), tips);
+        }
+
+
+
+        type = new TypeToken<List<TipsModel>>() {
+        }.getType();
+        gson = new Gson();
+        json = sharedPreferences.getString(DataLoadActivity.LAND_PREPARATION_TIPS, "");
+        mDataLandPreparationTips = gson.fromJson(json, type);
+        Log.d("check tips data", String.valueOf(mDataLandPreparationTips.size()));
+        Map<String, CustomListItem_Tips> landPreparationTipsMap = new HashMap<>();
+        for (TipsModel i : mDataLandPreparationTips) {
+
+            Log.d("check" ,i.getTipsBrief());
+
+            CustomListItem_Tips tips = new CustomListItem_Tips(i.getTipsPhoto(),i.getTipsBrief(),i.getTipsId());
+
+            landPreparationTipsMap.put(i.getTipsId(), tips);
+        }
+
+
+
+
         searchInput.setBackgroundResource(R.drawable.search_input_style);
         rootLayout.setBackgroundColor(getResources().getColor(R.color.white));
         Log.d("check map at first", String.valueOf(diseasesModelMap.size()));
 
 
-        cultivationListAdapterCultivation = new ListCultivation_Adapter(this.getContext(), mDataCrops, diseasesModelMap, diseaseCategoriesMap);CultivationRecylerView.setAdapter(cultivationListAdapterCultivation);
+        cultivationListAdapterCultivation = new ListCultivation_Adapter(this.getContext(), mDataCrops, diseasesModelMap, diseaseCategoriesMap,cropCareTipsMap,cropPlantTipsMap,cropSelectionTipsMap,landPreparationTipsMap,landSelectionTipsMap);
+//        cultivationListAdapterCultivation = new ListCultivation_Adapter(this.getContext(), mDataCrops, diseasesModelMap, diseaseCategoriesMap);
+        CultivationRecylerView.setAdapter(cultivationListAdapterCultivation);
         CultivationRecylerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         searchInput.addTextChangedListener(new TextWatcher() {
