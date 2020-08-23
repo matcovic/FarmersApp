@@ -245,7 +245,11 @@
     <string name="pushpo_dhap">পুষ্পোদ্গম ধাপ</string>
     <string name="folon_dhap">ফলন ধাপ</string>
     <string name="fosol_katar_dhap">ফসল কাটার ধাপ</string>
-
+    <string name="land_selection">স্থান নির্বাচন</string>
+    <string name="crop_selection">উদ্ভিদ নির্বাচন</string>
+    <string name="crop_plant">রোপণ</string>
+    <string name="crop_care">পরিচর্যা</string>
+    <string name="land_prepare">মাঠ প্রস্তুতি</string>
 
 
 </resources>

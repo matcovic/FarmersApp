@@ -11,7 +11,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="10dp">
 
             <TextView
@@ -19,28 +19,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="উদ্ভিদ নির্বাচন"
-                android:textSize="18sp"
                 android:textColor="@color/black"
-                android:textStyle="bold"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/farmingInfoImage_details"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_below="@+id/farmingInfoTitle_details"
-                android:src="@drawable/test_success_story"
+                android:layout_marginBottom="15dp"
                 android:scaleType="fitXY"
 
-                android:layout_marginBottom="15dp"/>
+                android:src="@drawable/test_success_story" />
 
             <TextView
                 android:id="@+id/farmingInfoArticle_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/farmingInfoImage_details"
                 android:text="Article on the farming tips"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:layout_below="@+id/farmingInfoImage_details"/>
+                android:textSize="18sp" />
 
         </RelativeLayout>
 
