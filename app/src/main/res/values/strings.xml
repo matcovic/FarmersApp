@@ -250,6 +250,13 @@
     <string name="crop_plant">রোপণ</string>
     <string name="crop_care">পরিচর্যা</string>
     <string name="land_prepare">মাঠ প্রস্তুতি</string>
+    <string name="soil_care">মাটির যত্ন</string>
+    <string name="pesticides">কীটনাশক</string>
+    <string name="seed_care">বীজের যত্ন</string>
+    <string name="insects">পোকামাকড়</string>
+    <string name="technology">প্রযুক্তি</string>
+    <string name="instrument">যন্ত্রপাতি</string>
+    <string name="crop_nutrition">ফসলের পুষ্টি</string>
 
 
 </resources>

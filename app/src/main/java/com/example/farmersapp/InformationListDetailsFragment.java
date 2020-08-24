@@ -10,6 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.farmersapp.adapter.ListInformation_Adapter;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.Objects;
+
 public class InformationListDetailsFragment extends Fragment {
 
     //Widgets
@@ -58,6 +65,15 @@ public class InformationListDetailsFragment extends Fragment {
         informationTitle_details = convertView.findViewById(R.id.informationTitle_details);
         informationArticle_details = convertView.findViewById(R.id.informationArticle_details);
         informationImage_details = convertView.findViewById(R.id.informationImage_details);
+        Bundle args = getArguments();
+        final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://farmersapp-31e06.appspot.com/"+args.getString(ListInformation_Adapter.INFO_STATUS)+"/").child(args.getString(ListInformation_Adapter.INFO_DETAILS_PHOTO)+".jpg");
+
+        informationArticle_details.setText(args.getString(ListInformation_Adapter.INFO_DETAILS_BRIEF));
+        Glide.with(requireContext())
+                .load(storageReference)
+                .into(informationImage_details);
+
+        informationTitle_details.setText(args.getString(ListInformation_Adapter.INFO_DETAILS_TITLE));
 
         return convertView;
     }
