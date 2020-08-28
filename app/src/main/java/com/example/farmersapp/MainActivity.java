@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
         permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
 
 
 
@@ -85,6 +87,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         ALL_PERMISSIONS_RESULT
                 );
             }
+            else {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(MainActivity.this, FarmerLoginActivity.class));
+                        finish();
+                    }
+                }, SPLASH_SCREEN);
+            }
         }
 
 //        login_as_farmer = findViewById(R.id.login_as_farmer);
@@ -93,13 +104,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         firebaseAuth = FirebaseAuth.getInstance();
         firstTimeLunch();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(MainActivity.this, FarmerLoginActivity.class));
-                finish();
-            }
-        }, SPLASH_SCREEN);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                startActivity(new Intent(MainActivity.this, FarmerLoginActivity.class));
+//                finish();
+//            }
+//        }, SPLASH_SCREEN);
     }
 
     @Override
@@ -159,8 +170,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for (String perm : permissionsToRequest) {
                 if (!hasPermission(perm)) {
                     permissionsRejected.add(perm);
-
-
+                }
+                else{
+                    startActivity(new Intent(MainActivity.this, FarmerLoginActivity.class));
+                    finish();
                 }
             }
             if (permissionsRejected.size() > 0) {

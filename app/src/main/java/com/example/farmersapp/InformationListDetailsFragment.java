@@ -66,7 +66,9 @@ public class InformationListDetailsFragment extends Fragment {
         informationArticle_details = convertView.findViewById(R.id.informationArticle_details);
         informationImage_details = convertView.findViewById(R.id.informationImage_details);
         Bundle args = getArguments();
-        final StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://farmersapp-31e06.appspot.com/"+args.getString(ListInformation_Adapter.INFO_STATUS)+"/").child(args.getString(ListInformation_Adapter.INFO_DETAILS_PHOTO)+".jpg");
+        final StorageReference storageReference = FirebaseStorage.getInstance()
+                .getReferenceFromUrl("gs://farmersapp-31e06.appspot.com/"+args.getString(ListInformation_Adapter.INFO_STATUS)+"/")
+                .child(args.getString(ListInformation_Adapter.INFO_DETAILS_PHOTO)+".jpg");
 
         informationArticle_details.setText(args.getString(ListInformation_Adapter.INFO_DETAILS_BRIEF));
         Glide.with(requireContext())
