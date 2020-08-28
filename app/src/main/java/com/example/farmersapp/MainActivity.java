@@ -11,9 +11,15 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -41,13 +47,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button login_as_farmer;
     private Button login_as_buyer;
 
+    //variables for animation
+    private static int SPLASH_SCREEN = 5000;
+    Animation topAnim, bottomAnim;
+    ImageView splashArt;
+    TextView logo, slogan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        //Animations
+        topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
+        bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+        splashArt = findViewById(R.id.splashArt);
+        logo = findViewById(R.id.logo);
+        slogan = findViewById(R.id.slogan);
+
+        splashArt.setAnimation(topAnim);
+        logo.setAnimation(bottomAnim);
+        slogan.setAnimation(bottomAnim);
+
 
         permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
         permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
 
 
 
@@ -60,13 +87,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         ALL_PERMISSIONS_RESULT
                 );
             }
+            else {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(MainActivity.this, FarmerLoginActivity.class));
+                        finish();
+                    }
+                }, SPLASH_SCREEN);
+            }
         }
 
-        login_as_farmer = findViewById(R.id.login_as_farmer);
-        login_as_farmer.setOnClickListener(this);
+//        login_as_farmer = findViewById(R.id.login_as_farmer);
+//        login_as_farmer.setOnClickListener(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firstTimeLunch();
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                startActivity(new Intent(MainActivity.this, FarmerLoginActivity.class));
+//                finish();
+//            }
+//        }, SPLASH_SCREEN);
     }
 
     @Override
@@ -126,8 +170,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for (String perm : permissionsToRequest) {
                 if (!hasPermission(perm)) {
                     permissionsRejected.add(perm);
-
-
+                }
+                else{
+                    startActivity(new Intent(MainActivity.this, FarmerLoginActivity.class));
+                    finish();
                 }
             }
             if (permissionsRejected.size() > 0) {
@@ -162,12 +208,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.login_as_farmer) {
-
-
-            startActivity(new Intent(MainActivity.this, FarmerLoginActivity.class));
-            finish();
-        }
+//        if (v.getId() == R.id.login_as_farmer) {
+//
+//
+//            startActivity(new Intent(MainActivity.this, FarmerLoginActivity.class));
+//            finish();
+//        }
 
     }
 

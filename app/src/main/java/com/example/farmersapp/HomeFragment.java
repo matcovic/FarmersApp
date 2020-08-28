@@ -231,9 +231,9 @@ public class HomeFragment extends Fragment implements LocationListener {
 
         Long updatedAt = jsonObj.getLong("dt");
         String updatedAtText = "Updated at: " + new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(new Date(updatedAt * 1000));
-        String temp = conversionOfTemp(main.getString("temp")) + "°C";
-        String tempMin = conversionOfTemp(main.getString("temp_min")) + "°C";
-        String tempMax = conversionOfTemp(main.getString("temp_max")) + " / ";
+        String temp = digitConversionEngToBangla(conversionOfTemp(main.getString("temp"))) + "°";
+        String tempMin = digitConversionEngToBangla(conversionOfTemp(main.getString("temp_min"))) + "°";
+        String tempMax = digitConversionEngToBangla(conversionOfTemp(main.getString("temp_max"))) + " / ";
         String pressure = main.getString("pressure");
         String humidity = main.getString("humidity");
 
@@ -434,6 +434,35 @@ public class HomeFragment extends Fragment implements LocationListener {
   private void clickAnimation(View v) {
     Animation animShake = AnimationUtils.loadAnimation(getActivity(),R.anim.shake_button);
     v.startAnimation(animShake);
+  }
+
+  public String digitConversionEngToBangla(int value) {
+    StringBuilder result = new StringBuilder();
+    String temp = Integer.toString(value);
+
+    for(int i = 0; i<temp.length(); i++) {
+      if(temp.charAt(i) == '0')
+        result.append("০");
+      else if(temp.charAt(i) == '1')
+        result.append("১");
+      else if(temp.charAt(i) == '2')
+        result.append("২");
+      else if(temp.charAt(i) == '3')
+        result.append("৩");
+      else if(temp.charAt(i) == '4')
+        result.append("৪");
+      else if(temp.charAt(i) == '5')
+        result.append("৫");
+      else if(temp.charAt(i) == '6')
+        result.append("৬");
+      else if(temp.charAt(i) == '7')
+        result.append("৭");
+      else if(temp.charAt(i) == '8')
+        result.append("৮");
+      else if(temp.charAt(i) == '9')
+        result.append("৯");
+    }
+    return result.toString();
   }
 
 }

@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,8 +34,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private AlertDialog.Builder builder;
     private AlertDialog dialog;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
 
-    private EditText enterNameText, phoneNoText, occupationText;
+    private EditText enterNameText, phoneNoText, occupationText, birthDateText;
     Spinner birth_dayText, birth_monthText, birth_yearText, divisionText, districtText,
             subDistrictText, unionText, thanaText, villageText;
     private Button regConfirmButton;
@@ -49,7 +53,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private String mUid;
 
     private String division_name[], district_name_barisal[], union_name_barisal[], subDivision_name_barisal[], village_name_barisal[], thana_name_barisal[];
-    private String date[], month[], year[];
+//    private String date[], month[], year[];
+    private String birth_dayOfMonth, birth_month, birth_year;
 
 
     @Override
@@ -63,9 +68,7 @@ public class RegistrationActivity extends AppCompatActivity {
         enterNameText = findViewById(R.id.regActivity_name);
         phoneNoText = findViewById(R.id.regActivity_phoneNo);
         occupationText = findViewById(R.id.regActivity_occupation);
-        birth_dayText = findViewById(R.id.regActivity_birth_day);
-        birth_monthText = findViewById(R.id.regActivity_birth_month);
-        birth_yearText = findViewById(R.id.regActivity_birth_year);
+        birthDateText = findViewById(R.id.regActivity_birthDate);
         divisionText = findViewById(R.id.regActivity_division);
         districtText = findViewById(R.id.regActivity_district);
         subDistrictText = findViewById(R.id.regActivity_subDistrict);
@@ -77,10 +80,31 @@ public class RegistrationActivity extends AppCompatActivity {
         phoneNumber = getIntent().getExtras().getString("phone");
         sourceActivity = getIntent().getExtras().getString("activity");
 
+        //Birthday Date picker
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int dayOfmonth = calendar.get(Calendar.DAY_OF_MONTH);
 
-        date = getResources().getStringArray(R.array.date);
-        month = getResources().getStringArray(R.array.month);
-        year = getResources().getStringArray(R.array.year);
+        birthDateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        RegistrationActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        month = month + 1;
+                        birth_dayOfMonth = digitConversionEngToBangla(dayOfMonth);
+                        birth_month = digitConversionEngToBangla(month);
+                        birth_year = digitConversionEngToBangla(year);
+                        String date = birth_dayOfMonth+"/"+birth_month+"/"+birth_year;
+                        birthDateText.setText(date);
+                    }
+                },year,month,dayOfmonth);
+                datePickerDialog.show();
+            }
+        });
+
         division_name = getResources().getStringArray(R.array.division_name);
         district_name_barisal = getResources().getStringArray(R.array.district_barisal);
         subDivision_name_barisal = getResources().getStringArray(R.array.subDistrict_barisal);
@@ -89,9 +113,6 @@ public class RegistrationActivity extends AppCompatActivity {
         village_name_barisal = getResources().getStringArray(R.array.union_gouronodi);
 
 
-        ArrayAdapter<String> date_adpter = new ArrayAdapter<String>(this, R.layout.sample_layout_spinner, R.id.sample_textView, date);
-        ArrayAdapter<String> month_adpter = new ArrayAdapter<String>(this, R.layout.sample_layout_spinner, R.id.sample_textView, month);
-        ArrayAdapter<String> year_adpter = new ArrayAdapter<String>(this, R.layout.sample_layout_spinner, R.id.sample_textView, year);
         ArrayAdapter<String> division_adpter = new ArrayAdapter<String>(this, R.layout.sample_layout_spinner, R.id.sample_textView, division_name);
         ArrayAdapter<String> district_adpter = new ArrayAdapter<String>(this, R.layout.sample_layout_spinner, R.id.sample_textView, district_name_barisal);
         ArrayAdapter<String> subDivision_adpter = new ArrayAdapter<String>(this, R.layout.sample_layout_spinner, R.id.sample_textView, subDivision_name_barisal);
@@ -99,9 +120,6 @@ public class RegistrationActivity extends AppCompatActivity {
         ArrayAdapter<String> thana_adpter = new ArrayAdapter<String>(this, R.layout.sample_layout_spinner, R.id.sample_textView, thana_name_barisal);
         ArrayAdapter<String> village_adpter = new ArrayAdapter<String>(this, R.layout.sample_layout_spinner, R.id.sample_textView, village_name_barisal);
 
-        birth_dayText.setAdapter(date_adpter);
-        birth_monthText.setAdapter(month_adpter);
-        birth_yearText.setAdapter(year_adpter);
         divisionText.setAdapter(division_adpter);
         districtText.setAdapter(district_adpter);
         subDistrictText.setAdapter(subDivision_adpter);
@@ -130,9 +148,9 @@ public class RegistrationActivity extends AppCompatActivity {
         List<String> list = new ArrayList<>();
         user.put("name", enterNameText.getText().toString());
         user.put("phone", phoneNoText.getText().toString());
-        user.put("dayOfBirth", birth_dayText.getSelectedItem().toString());
-        user.put("monthOfBirth", birth_monthText.getSelectedItem().toString());
-        user.put("yearOfBirth", birth_yearText.getSelectedItem().toString());
+        user.put("dayOfBirth", birth_dayOfMonth);
+        user.put("monthOfBirth", birth_month);
+        user.put("yearOfBirth", birth_year);
         user.put("division", divisionText.getSelectedItem().toString());
         user.put("district", districtText.getSelectedItem().toString());
         user.put("union", unionText.getSelectedItem().toString());
@@ -143,7 +161,7 @@ public class RegistrationActivity extends AppCompatActivity {
         user.put("logedInPhoneNumber", phoneNumber);
         user.put("userUId",mUid);
         user.put("marketProductList",list);
-        // user.put("userId",mUser.toString());
+       // user.put("userId",mUser.toString());
         Log.d("checked","register activity"+phoneNumber+"  ");
 
         db.collection("users").document(mUid).set(user)
@@ -179,6 +197,35 @@ public class RegistrationActivity extends AppCompatActivity {
         Intent dataLoadIntent= new Intent(RegistrationActivity.this,DataLoadActivity.class);
         startActivity(dataLoadIntent);
         finish();
+    }
+
+    public String digitConversionEngToBangla(int value) {
+        StringBuilder result = new StringBuilder();
+        String temp = Integer.toString(value);
+
+        for(int i = 0; i<temp.length(); i++) {
+            if(temp.charAt(i) == '0')
+                result.append("০");
+            else if(temp.charAt(i) == '1')
+                result.append("১");
+            else if(temp.charAt(i) == '2')
+                result.append("২");
+            else if(temp.charAt(i) == '3')
+                result.append("৩");
+            else if(temp.charAt(i) == '4')
+                result.append("৪");
+            else if(temp.charAt(i) == '5')
+                result.append("৫");
+            else if(temp.charAt(i) == '6')
+                result.append("৬");
+            else if(temp.charAt(i) == '7')
+                result.append("৭");
+            else if(temp.charAt(i) == '8')
+                result.append("৮");
+            else if(temp.charAt(i) == '9')
+                result.append("৯");
+        }
+        return result.toString();
     }
 
 

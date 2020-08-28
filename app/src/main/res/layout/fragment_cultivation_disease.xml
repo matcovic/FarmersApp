@@ -13,53 +13,67 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <TextView
+                android:id="@+id/chara_ropon_dhap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/chara_ropon_dhap" />
+                android:text="@string/chara_ropon_dhap"
+                android:textColor="#639a67"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chara_ropon_dhap_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 tools:listitem="@layout/list_cultivation_disease" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/udhvidh_bordhon_dhap" />
+                android:text="@string/udhvidh_bordhon_dhap"
+                android:textColor="#639a67"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/udhvidh_bordhon_dhap_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 tools:listitem="@layout/list_cultivation_disease" />
 
             <TextView
                 android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/pushpo_dhap" />
+                android:text="@string/pushpo_dhap"
+                android:textColor="#639a67"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pushso_dhap_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 tools:listitem="@layout/list_cultivation_disease" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/folon_dhap" />
+                android:text="@string/folon_dhap"
+                android:textColor="#639a67"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/folon_dhap_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 tools:listitem="@layout/list_cultivation_disease" />
 
 
@@ -67,12 +81,15 @@
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/fosol_katar_dhap" />
+                android:text="@string/fosol_katar_dhap"
+                android:textColor="#639a67"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fosol_katar_dhap_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 tools:listitem="@layout/list_cultivation_disease" />
 
         </LinearLayout>

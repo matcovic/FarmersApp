@@ -11,9 +11,12 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.animation.AnimationUtils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -47,7 +51,7 @@ public class FarmerLoginActivity extends AppCompatActivity {
     private AlertDialog dialog;
 
     private static final String TAG = "Printing";
-    private AutoCompleteTextView phoneNumberText;
+    private EditText phoneNumberText;
     //   private EditText pinNumberText;
 //    private TextView forgotPinText;
     private Button loginButton;
@@ -79,10 +83,8 @@ public class FarmerLoginActivity extends AppCompatActivity {
         phoneNumberText = findViewById(R.id.farLogActivity_enter_phoneText);
         //      pinNumberText = findViewById(R.id.farLogActivity_enter_pinText);
         //     forgotPinText = findViewById(R.id.farLogActivity_forgotPin);
-        loginButton = findViewById(R.id.farLogActivity_loginButton);
-        //      createAccount = findViewById(R.id.farLogActivity_createAccount);
 
-        //       forgotPinText.setOnClickListener(this);
+        loginButton = findViewById(R.id.farLogActivity_loginButton);
 
 
         progressBar = findViewById(R.id.progressBarDialog);

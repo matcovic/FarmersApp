@@ -4,231 +4,236 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="10dp"
     tools:context=".RegistrationActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        android:text="@string/general_info"
-        android:layout_gravity="center"/>
-
-    <EditText
-        android:id="@+id/regActivity_name"
-
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:inputType="textPersonName"
-        android:hint="@string/enter_name" />
-
-    <EditText
-        android:id="@+id/regActivity_phoneNo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_phoneText"
-        android:inputType="phone"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/regActivity_occupation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/occupation_text"
-        android:inputType="textPersonName"
-        android:textSize="15sp" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/birthDay"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dateOfBirth"
-            android:textSize="15sp" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="10dp">
 
-        <TextView
-            android:id="@+id/day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/day"
-            android:textSize="15sp"
-            android:layout_marginStart="10dp"/>
-        <Spinner
-            android:id="@+id/regActivity_birth_day"
-            android:layout_width="62dp"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:textSize="15sp" />
+            <TextView
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="@string/general_info"
+                android:textColor="@color/black"
+                android:layout_gravity="center"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/month"
-            android:textSize="15sp" />
-        <Spinner
-            android:id="@+id/regActivity_birth_month"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:textSize="15sp" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_name"
+                android:layout_margin="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/year"
-            android:textSize="15sp" />
-        <Spinner
-            android:id="@+id/regActivity_birth_year"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:textSize="15sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/regActivity_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:inputType="textPersonName"/>
 
-    </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:textSize="15sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/address"
-        android:textStyle="bold"
-        android:layout_gravity="left"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_phoneText"
+                android:layout_margin="5dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/regActivity_phoneNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:inputType="phone"/>
 
-        <TextView
-            android:id="@+id/divisionText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@string/division"
-            android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/regActivity_division"
-            android:layout_width="231dp"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/divisionText"
-            android:layout_marginEnd="-269dp"
-            android:textSize="15sp" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/occupation_text"
+                android:layout_margin="5dp">
 
-        <TextView
-            android:id="@+id/districtText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/divisionText"
-            android:padding="10dp"
-            android:text="@string/district"
-            android:textSize="15sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/regActivity_occupation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:inputType="textPersonName"/>
 
-        <Spinner
-            android:id="@+id/regActivity_district"
-            android:layout_width="231dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/regActivity_division"
-            android:layout_alignEnd="@+id/districtText"
-            android:layout_marginTop="23dp"
-            android:layout_marginEnd="-272dp"
-            android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/subDistrictText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/districtText"
-            android:padding="10dp"
-            android:text="@string/subDistrict"
-            android:textSize="15sp" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dateOfBirth"
+                android:layout_margin="5dp">
 
-        <Spinner
-            android:id="@+id/regActivity_subDistrict"
-            android:layout_width="231dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/regActivity_district"
-            android:layout_alignEnd="@+id/subDistrictText"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="-251dp"
-            android:textSize="15sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/regActivity_birthDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:focusable="false" />
 
-        <TextView
-            android:id="@+id/unionText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/subDistrictText"
-            android:padding="10dp"
-            android:text="@string/union"
-            android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/regActivity_union"
-            android:layout_width="231dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/regActivity_subDistrict"
-            android:layout_alignEnd="@+id/unionText"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="-256dp"
-            android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/thanaText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/unionText"
-            android:layout_marginTop="1dp"
-            android:padding="10dp"
-            android:text="@string/thana"
-            android:textSize="15sp" />
+            <TextView
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:textStyle="bold"
+                android:layout_gravity="left"/>
 
-        <Spinner
-            android:id="@+id/regActivity_thana"
-            android:layout_width="231dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/regActivity_union"
-            android:layout_alignEnd="@+id/thanaText"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="-280dp"
-            android:textSize="15sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
 
-        <TextView
-            android:id="@+id/villageText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/thanaText"
-            android:layout_marginTop="5dp"
-            android:padding="10dp"
-            android:text="@string/village"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/divisionText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/division"
+                    android:textSize="15sp" />
 
-        <Spinner
-            android:id="@+id/regActivity_village"
-            android:layout_width="231dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/regActivity_thana"
-            android:layout_alignEnd="@+id/villageText"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="-282dp"
-            android:textSize="15sp" />
+                <Spinner
+                    android:id="@+id/regActivity_division"
+                    android:layout_width="231dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/divisionText"
+                    android:layout_marginEnd="-269dp"
+                    android:textSize="15sp" />
 
-    </RelativeLayout>
-    <Button
-        android:layout_marginTop="10dp"
-        android:textSize="15sp"
-        android:id="@+id/regActivity_confimButton"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:text="@string/confirmRegistration" />
+                <TextView
+                    android:id="@+id/districtText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/divisionText"
+                    android:padding="10dp"
+                    android:text="@string/district"
+                    android:textSize="15sp" />
+
+                <Spinner
+                    android:id="@+id/regActivity_district"
+                    android:layout_width="231dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/regActivity_division"
+                    android:layout_alignEnd="@+id/districtText"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginEnd="-272dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/subDistrictText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/districtText"
+                    android:padding="10dp"
+                    android:text="@string/subDistrict"
+                    android:textSize="15sp" />
+
+                <Spinner
+                    android:id="@+id/regActivity_subDistrict"
+                    android:layout_width="231dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/regActivity_district"
+                    android:layout_alignEnd="@+id/subDistrictText"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginEnd="-251dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/unionText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/subDistrictText"
+                    android:padding="10dp"
+                    android:text="@string/union"
+                    android:textSize="15sp" />
+
+                <Spinner
+                    android:id="@+id/regActivity_union"
+                    android:layout_width="231dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/regActivity_subDistrict"
+                    android:layout_alignEnd="@+id/unionText"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="-256dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/thanaText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/unionText"
+                    android:layout_marginTop="1dp"
+                    android:padding="10dp"
+                    android:text="@string/thana"
+                    android:textSize="15sp" />
+
+                <Spinner
+                    android:id="@+id/regActivity_thana"
+                    android:layout_width="231dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/regActivity_union"
+                    android:layout_alignEnd="@+id/thanaText"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="-280dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/villageText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/thanaText"
+                    android:layout_marginTop="5dp"
+                    android:padding="10dp"
+                    android:text="@string/village"
+                    android:textSize="15sp" />
+
+                <Spinner
+                    android:id="@+id/regActivity_village"
+                    android:layout_width="231dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/regActivity_thana"
+                    android:layout_alignEnd="@+id/villageText"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginEnd="-282dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+            <Button
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:id="@+id/regActivity_confimButton"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:text="@string/confirmRegistration" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
 
 </LinearLayout>

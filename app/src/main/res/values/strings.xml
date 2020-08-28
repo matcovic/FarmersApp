@@ -5,16 +5,17 @@
     <string name="your_phoneno">মোবাইল নম্বর:</string>
     <string name="login_as_farmerText">কৃষিজীবী হিসেবে লগ ইন করুন</string>
     <string name="login_as_buyerText">ক্রেতা হিসেবে লগ ইন করুন</string>
-    <string name="enter_phoneText">মোবাইল নম্বর দিন</string>
+    <string name="enter_phoneText">মোবাইল নম্বর</string>
     <string name="enter_pinText">পিন নম্বর দিন</string>
     <string name="confirm_pinText">পুনরায় পিন নম্বর দিন</string>
     <string name="forgotPin_text">পিন নম্বর ভুলে গিয়েছেন?</string>
     <string name="loginButton_text">লগ ইন</string>
+    <string name="loginTitle_text">লগ ইন/Login</string>
     <string name="createAcc_asFarmer_text">কৃষিজীবী হিসেবে নতুন একাউন্ট তৈরী করতে এখানে ট্যাপ করুন!</string>
     <string name="createAcc_asBuyer_text">ক্রেতা হিসেবে নতুন একাউন্ট তৈরী করতে এখানে ট্যাপ করুন!</string>
     <string name="general_info">সাধারণ তথ্য</string>
-    <string name="enter_name">নাম দিন</string>
-    <string name="dateOfBirth">জন্ম তারিখ:</string>
+    <string name="enter_name">নাম</string>
+    <string name="dateOfBirth">জন্ম তারিখ</string>
     <string name="day">দিন</string>
     <string name="month">মাস</string>
     <string name="year">বছর</string>
@@ -31,7 +32,7 @@
     <string name="otp_info_text">আপনার ফোনে পাঠানো ওয়ান টাইম পাসওয়ার্ডটি প্রদান করুন</string>
     <string name="otp_hint">ওয়ান টাইম পাসওয়ার্ড</string>
     <string name="otp_confirmText">পরবর্তী</string>
-    <string name="occupation_text">পেশাঃ</string>
+    <string name="occupation_text">পেশা</string>
 
     <string name="home">হোম</string>
     <string name="marketplace">কেনা-বেচা</string>
