@@ -7,6 +7,7 @@
     <color name="color_bottom_navigation">#d9bf77</color>
     <color name="color_menu_selected">#2b580c</color>
     <color name="color_menu_notSelected">#639a67</color>
+    <color name="color_main">#d8ebb5</color>
 
 
     <color name="white">#ffffff</color>

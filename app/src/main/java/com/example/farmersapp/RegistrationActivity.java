@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.farmersapp.util.CurrentUserApi;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,7 +40,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText enterNameText, phoneNoText, occupationText, birthDateText;
     Spinner birth_dayText, birth_monthText, birth_yearText, divisionText, districtText,
             subDistrictText, unionText, thanaText, villageText;
-    private Button regConfirmButton;
+    private MaterialButton regConfirmButton;
 
     //Declaration for PopUp
     private EditText otpPassText;

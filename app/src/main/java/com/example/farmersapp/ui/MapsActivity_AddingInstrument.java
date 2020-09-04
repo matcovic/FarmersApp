@@ -73,7 +73,7 @@ public class MapsActivity_AddingInstrument extends FragmentActivity implements O
         confirmLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View view = getLayoutInflater().inflate(R.layout.fragment_add_new_instrument,null);
+                View view = getLayoutInflater().inflate(R.layout.fragment_add_new_instrument, null);
                 setLocationText = view.findViewById(R.id.setLocation);
                 setLocationText.setText(currentUserApi.getAddress_of_instrument());
                 finish();
@@ -93,13 +93,13 @@ public class MapsActivity_AddingInstrument extends FragmentActivity implements O
                     if (addressList != null && addressList.size() > 0) {
                         String locality = addressList.get(0).getAddressLine(0);
                         String country = addressList.get(0).getCountryName();
-                        if (!locality.isEmpty() && !country.isEmpty()){
-                            GeoPoint geoPoint = new GeoPoint(latLng.latitude,latLng.longitude);
+                        if (!locality.isEmpty() && !country.isEmpty()) {
+                            GeoPoint geoPoint = new GeoPoint(latLng.latitude, latLng.longitude);
                             currentUserApi.setGeoPoint_of_instrument(geoPoint);
                             currentUserApi.setAddress_of_instrument(locality);
                             showLocation.setText(locality);
 
-                            Log.d("Test", "From Dragging>>>>LATLNG:   "+currentUserApi.getAddress_of_instrument()+"     "+currentUserApi.getGeoPoint_of_instrument().toString());
+                            Log.d("Test", "From Dragging>>>>LATLNG:   " + currentUserApi.getAddress_of_instrument() + "     " + currentUserApi.getGeoPoint_of_instrument().toString());
 
                         }
                     }
@@ -116,7 +116,7 @@ public class MapsActivity_AddingInstrument extends FragmentActivity implements O
         mMap = googleMap;
         mMap.setOnCameraIdleListener(onCameraIdleListener);
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
 
             enableUserLocation();
@@ -136,32 +136,52 @@ public class MapsActivity_AddingInstrument extends FragmentActivity implements O
                 layoutParams.setMargins(0, 180, 180, 0);
             }
 
-        }else {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+        } else {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}
                         , ACCESS_LOCATION_REQ_CODE);
-            }else {
-                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}
                         , ACCESS_LOCATION_REQ_CODE);
             }
         }
     }
 
     private void zoomToUserLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         Task<Location> locationTask = fusedLocationProviderClient.getLastLocation();
 
         locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                Log.d("Test","From zoomToUserLocation>>>> LATLNG:" +location.getLatitude()+"   "+location.getLongitude());
+                Log.d("Test", "From zoomToUserLocation>>>> LATLNG:" + location.getLatitude() + "   " + location.getLongitude());
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
             }
         });
     }
 
     private void enableUserLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         mMap.setMyLocationEnabled(true);
     }
 

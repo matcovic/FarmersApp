@@ -84,6 +84,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     //http request
     implementation 'com.github.androdocs:Simple-HTTP-Request:v1.0'
+    //multi line collapsing toolbar
+    implementation 'net.opacapp:multiline-collapsingtoolbar:27.1.1'
 
 
     testImplementation 'junit:junit:4.12'

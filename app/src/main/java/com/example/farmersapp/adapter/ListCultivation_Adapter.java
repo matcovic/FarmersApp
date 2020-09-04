@@ -38,6 +38,7 @@ import com.example.farmersapp.model.CustomListItem_Tips;
 import com.example.farmersapp.model.DiseaseCategoriesModel;
 import com.example.farmersapp.model.DiseasesModel;
 import com.example.farmersapp.util.GlideApp;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
@@ -67,8 +68,8 @@ public class ListCultivation_Adapter extends RecyclerView.Adapter<ListCultivatio
     Map<String, CustomListItem_Tips> cropPlantTipsMap;
 
 
-    public static final String DISEASE_PAGE = "Data is not exist";
-    public static final String INFO_PAGE = "Data is not exist";
+    public static final String DISEASE_PAGE = "Data will be uploaded soon.";
+    public static final String INFO_PAGE = "Data will be uploaded soon.";
 
     public ListCultivation_Adapter(Context mContext, List<CustomListItem_Cultivation> mData, Map<String, CustomListItem_Diseases> diseasesModelMap, Map<String, CustomListItem_DiseaseCategories> diseaseCategoriesModelMap, Map<String, CustomListItem_Tips> cropCareTipsMap, Map<String, CustomListItem_Tips> cropPlantTipsMap, Map<String, CustomListItem_Tips> cropSelectionTipsMap, Map<String, CustomListItem_Tips> landPreparationTipsMap, Map<String, CustomListItem_Tips> landSelectionTipsMap) {
         this.mContext = mContext;
@@ -162,7 +163,7 @@ public class ListCultivation_Adapter extends RecyclerView.Adapter<ListCultivatio
 
         TextView title;
         ImageView imageView;
-        LinearLayout itemContainer;
+        MaterialCardView itemContainer;
         EasyFlipView mEasyFlipView;
         RelativeLayout tipsButton, diseaseButton;
 

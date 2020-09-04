@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="10dp"
-    tools:context=".AddNewInstrumentFragment"
-    android:background="#d8ebb5">
+    android:padding="15dp"
+    tools:context=".AddNewInstrumentFragment">
 
     <TextView
         android:id="@+id/title"
@@ -15,64 +14,110 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:textColor="#639a67"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
 
     <LinearLayout
         android:layout_below="@+id/title"
         android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Spinner
-            android:id="@+id/instrumentTypeSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"/>
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp">
 
             <TextView
-                android:text="@string/per_hour_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/category_instrument"
                 android:textSize="18sp"
-                android:layout_margin="10dp"/>
+                android:textColor="@color/black"/>
 
-            <EditText
-                android:id="@+id/perHourPrice"
+            <Spinner
+                android:id="@+id/instrumentTypeSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="10000"
-                android:inputType="number"
-                android:layout_margin="10dp"/>
+                android:layout_marginLeft="10dp"/>
+
         </LinearLayout>
 
-        <TextView
-            android:text="@string/upload_image_text"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:padding="10dp"/>
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp"
+            android:layout_margin="10dp">
 
-        <ImageView
-            android:id="@+id/instrumentImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/upload_image_icon"
-            android:layout_margin="10dp"
-            android:scaleType="fitXY"
-            android:layout_gravity="center"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/upload_image_text"
+                    android:text="@string/upload_image_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="10dp"
+                    android:textColor="@color/black"/>
+
+                <ImageView
+                    android:id="@+id/instrumentImage"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/upload_image_icon"
+                    android:layout_margin="10dp"
+                    android:scaleType="fitXY"
+                    android:layout_below="@+id/upload_image_text"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="@string/upload_here"
+                    android:textSize="15sp"
+                    android:layout_toEndOf="@+id/instrumentImage"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="20dp"/>
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:theme="@style/TextInputLayoutWithPrimaryColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/per_hour_price"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/perHourPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="18sp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
             android:id="@+id/setLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textNoSuggestions"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
     </LinearLayout>
 
 
@@ -83,9 +128,11 @@
         android:layout_gravity="center"
         android:layout_margin="40dp"
         android:layout_below="@id/layout1"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/proressbardialog"
+        />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/confirmInstrument_reg_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,6 +140,7 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:layout_below="@id/progressBar"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        app:cornerRadius="16dp"/>
 
 </RelativeLayout>

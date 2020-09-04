@@ -16,7 +16,8 @@
         android:layout_height="match_parent"
         app:menu="@menu/navigation_drawer_menu"
         android:theme="@style/navigationTheme"
-        android:background="@color/color_bottom_navigation"/>
+        android:background="@color/color_main"
+        app:headerLayout="@layout/header"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/content"

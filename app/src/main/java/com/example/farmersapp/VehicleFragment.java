@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.farmersapp.ui.MapsActivity_AddingInstrument;
 import com.example.farmersapp.ui.MapsActivity_ShowInstrument;
+import com.google.android.material.card.MaterialCardView;
 
 
 public class VehicleFragment extends Fragment {
@@ -22,7 +23,7 @@ public class VehicleFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-   private Button takeRentButton, giveRentButton;
+   private MaterialCardView takeRentButton, giveRentButton;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -73,6 +74,7 @@ public class VehicleFragment extends Fragment {
                 Fragment fragment = new AddNewInstrumentFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_right,R.anim.enter_from_right,R.anim.exit_to_right);
                 fragmentTransaction.replace(R.id.container, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();

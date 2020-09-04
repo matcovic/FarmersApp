@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -31,6 +32,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androdocs.httprequest.HttpRequest;
+import com.example.farmersapp.adapter.ListSuccessStories_Adapter;
+import com.example.farmersapp.model.SuccessStories;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationAvailability;
 import com.google.android.gms.location.LocationCallback;
@@ -38,14 +41,22 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Executor;
@@ -57,6 +68,16 @@ public class HomeFragment extends Fragment implements LocationListener {
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
 
+  /***
+   * Firestore and widgets for Success_Stories View
+   */
+  private FirebaseFirestore db = FirebaseFirestore.getInstance();
+  private StorageReference storageReference;
+  private List<SuccessStories> successStoriesList;
+  private RecyclerView successStoriesRecyclerView;
+  private ListSuccessStories_Adapter listSuccessStoriesAdapter;
+  private CollectionReference collectionReference = db.collection("Success_Stories");
+
   //variables
   private FusedLocationProviderClient fusedLocationProviderClient;
   private LocationRequest locationRequest;
@@ -66,8 +87,8 @@ public class HomeFragment extends Fragment implements LocationListener {
 
   //widgets
   private Button learnMore;
-  private ImageView click_cultivation, click_microloan, click_poultry, click_disease, click_information, click_suggestion;
-  RecyclerView recyclerView_stories;
+  private ImageView click_cultivation, click_microloan, click_poultry, click_disease,
+          click_information, click_suggestion, click_news;
 
   //widgets for weather
   private TextView addressTxt, updated_atTxt, statusTxt, tempTxt, temp_minTxt, temp_maxTxt, sunriseTxt,
@@ -118,9 +139,44 @@ public class HomeFragment extends Fragment implements LocationListener {
             Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
       getLastLocation();
     }
+
+    collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+      @Override
+      public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+        if(!queryDocumentSnapshots.isEmpty()) {
+          for(QueryDocumentSnapshot successStory : queryDocumentSnapshots) {
+            SuccessStories successStories = successStory.toObject(SuccessStories.class);
+            successStoriesList.add(successStories);
+          }
+          //Invoke recyclerView
+          listSuccessStoriesAdapter = new ListSuccessStories_Adapter(getActivity(),successStoriesList);
+          successStoriesRecyclerView.setAdapter(listSuccessStoriesAdapter);
+          listSuccessStoriesAdapter.notifyDataSetChanged();
+        }else {
+          Log.d("Test","No story related document found");
+        }
+
+      }
+    }).addOnFailureListener(new OnFailureListener() {
+      @Override
+      public void onFailure(@NonNull Exception e) {
+        Log.d("Test","Success story query error");
+      }
+    });
   }
 
   private void getLastLocation() {
+    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+      // TODO: Consider calling
+      //    ActivityCompat#requestPermissions
+      // here to request the missing permissions, and then overriding
+      //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+      //                                          int[] grantResults)
+      // to handle the case where the user grants the permission. See the documentation
+      // for ActivityCompat#requestPermissions for more details.
+      return;
+    }
     fusedLocationProviderClient.getLastLocation()
             .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
               @Override
@@ -134,7 +190,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                   LON = String.valueOf(location.getLongitude());
                   new weatherTask().execute();
 
-                  Log.d("Test","FROM onSuccess......LAT: " +LAT+ "  LON: " +LON);
+                  Log.d("Test", "FROM onSuccess......LAT: " + LAT + "  LON: " + LON);
                 }
 
               }
@@ -287,7 +343,6 @@ public class HomeFragment extends Fragment implements LocationListener {
   }
 
 
-
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
@@ -317,12 +372,17 @@ public class HomeFragment extends Fragment implements LocationListener {
     click_microloan = convertView.findViewById(R.id.click_microloan);
     click_disease = convertView.findViewById(R.id.click_disease);
     click_poultry = convertView.findViewById(R.id.click_poultry);
-    click_suggestion = convertView.findViewById(R.id.click_suggestion);
+//    click_suggestion = convertView.findViewById(R.id.click_suggestion);
     click_information = convertView.findViewById(R.id.click_information);
+    click_news = convertView.findViewById(R.id.click_news);
     learnMore = convertView.findViewById(R.id.learnMore);
-    recyclerView_stories = convertView.findViewById(R.id.recyclerView_stories);
 
-//    recyclerView_stories.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false ));
+    //Invoking Success_Stories recyclerview
+    successStoriesList = new ArrayList<>();
+    successStoriesRecyclerView = convertView.findViewById(R.id.successStoriesRecyclerView);
+    successStoriesRecyclerView.setHasFixedSize(true);
+    successStoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()
+            ,LinearLayoutManager.HORIZONTAL,false ));
 
 
     click_information.setOnClickListener(new View.OnClickListener() {
@@ -347,48 +407,48 @@ public class HomeFragment extends Fragment implements LocationListener {
       }
     });
 
-    click_microloan.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        clickAnimation(v);
+//    click_microloan.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View v) {
+//        clickAnimation(v);
+//
+//        new Handler().postDelayed(new Runnable() {
+//          @Override
+//          public void run() {
+//
+//          }
+//        },300);
+//
+//      }
+//    });
 
-        new Handler().postDelayed(new Runnable() {
-          @Override
-          public void run() {
+//    click_disease.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View v) {
+//        clickAnimation(v);
+//
+//        new Handler().postDelayed(new Runnable() {
+//          @Override
+//          public void run() {
+//
+//          }
+//        },300);
+//      }
+//    });
 
-          }
-        },300);
-
-      }
-    });
-
-    click_disease.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        clickAnimation(v);
-
-        new Handler().postDelayed(new Runnable() {
-          @Override
-          public void run() {
-
-          }
-        },300);
-      }
-    });
-
-    click_poultry.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        clickAnimation(v);
-        new Handler().postDelayed(new Runnable() {
-          @Override
-          public void run() {
-
-          }
-        },300);
-
-      }
-    });
+//    click_poultry.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View v) {
+//        clickAnimation(v);
+//        new Handler().postDelayed(new Runnable() {
+//          @Override
+//          public void run() {
+//
+//          }
+//        },300);
+//
+//      }
+//    });
 
     click_cultivation.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -409,13 +469,33 @@ public class HomeFragment extends Fragment implements LocationListener {
       }
     });
 
-    click_suggestion.setOnClickListener(new View.OnClickListener() {
+//    click_suggestion.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View v) {
+//        clickAnimation(v);
+//        new Handler().postDelayed(new Runnable() {
+//          @Override
+//          public void run() {
+//
+//          }
+//        },300);
+//      }
+//    });
+
+    click_news.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         clickAnimation(v);
         new Handler().postDelayed(new Runnable() {
           @Override
           public void run() {
+            Fragment fragment = new NewsFragment();
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_right,R.anim.enter_from_right,R.anim.exit_to_right);
+            fragmentTransaction.replace(R.id.container, fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
 
           }
         },300);
