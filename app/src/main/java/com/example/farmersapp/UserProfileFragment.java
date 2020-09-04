@@ -49,7 +49,6 @@ public class UserProfileFragment extends Fragment {
     private ListMySellingItems_Adapter listMySellingItemsAdapter;
     private TextView textViewDisplayName, textViewDisplayPhoneNo, textViewDisplayDivision, textViewDisplayDistrict, textViewDisplaySubDistrict;
     private TextView textViewDisplayUnion, textViewDisplayThana, textViewDisplayVillage;
-    private TextView textViewTotalGivenRent, textViewTotalTakenRent;
     private CollectionReference productsOfMarketCollectionRef = FirebaseFirestore.getInstance().collection("products_of_market");
     boolean noSelling_status = false;
 
@@ -100,8 +99,6 @@ public class UserProfileFragment extends Fragment {
         textViewDisplayThana = view.findViewById(R.id.textView_dsiplay_thana);
         textViewDisplayVillage = view.findViewById(R.id.textView_dsiplay_village);
         textViewDisplayUnion = view.findViewById(R.id.textView_dsiplay_union);
-        textViewTotalGivenRent = view.findViewById(R.id.textView_total_rent_given);
-        textViewTotalTakenRent = view.findViewById(R.id.textView_total_rent_taken);
 
 
         recyclerView_mySelling_items = view.findViewById(R.id.recyclerView_mySelling_items);
@@ -183,8 +180,6 @@ public class UserProfileFragment extends Fragment {
                         textViewDisplayThana.setText(document.getString("thana"));
                         textViewDisplayVillage.setText(document.getString("village"));
                         textViewDisplayUnion.setText(document.getString("union"));
-                        textViewTotalGivenRent.setText("12");
-                        textViewTotalTakenRent.setText("5645");
 
                         addedProductsIdList = (List<String>) document.get("marketProductList");
                         Log.d(TAG, String.valueOf(addedProductsIdList));

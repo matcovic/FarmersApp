@@ -6,7 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
     <style name="navigationTheme">
 
@@ -23,6 +26,13 @@
     <style name="LoginButton" parent="Theme.MaterialComponents">
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimary">#639a67</item>
+    </style>
+    
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/enter_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/exit_to_right</item>
+        <item name="android:activityCloseEnterAnimation">@anim/enter_from_right</item>
+        <item name="android:activityCloseExitAnimation">@anim/exit_to_right</item>
     </style>
 
 </resources>

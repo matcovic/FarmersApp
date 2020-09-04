@@ -30,6 +30,7 @@ import com.example.farmersapp.ui.MapsActivity_AddingInstrument;
 import com.example.farmersapp.util.CurrentUserApi;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -61,7 +62,7 @@ public class AddNewInstrumentFragment extends Fragment {
     private String instrumentTypeText, instrumentPriceText, instrumentLocationText;
     private EditText perHourPriceEditText, setLocationEditText;
     private Spinner instrumentTypeSpinner;
-    private Button confirmInstrument_reg_Button;
+    private MaterialButton confirmInstrument_reg_Button;
     private ImageView instrumentImage;
     private ProgressBar progressBar;
 
@@ -139,6 +140,9 @@ public class AddNewInstrumentFragment extends Fragment {
             currentUserId = CurrentUserApi.getInstance().getUserId();
             currentUserName = CurrentUserApi.getInstance().getName();
             currentUserPhone = CurrentUserApi.getInstance().getPhoneNumber();
+            Log.d("Test",currentUserId +" "+currentUserName+" "+currentUserPhone+ "From AddNewInstrumentFragment");
+        }else {
+            Log.d("Test","CurrentUser is null. From AddNewInstrumentFragment");
         }
 
         instrumentImage.setOnClickListener(new View.OnClickListener() {

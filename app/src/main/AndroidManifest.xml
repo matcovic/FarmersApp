@@ -36,17 +36,24 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".DataLoadActivity" />
+        <activity android:name=".DataLoadActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ui.MapsActivity_ShowInstrument"
-            android:label="@string/title_activity_maps__show_instrument" />
+            android:label="@string/title_activity_maps__show_instrument"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ui.MapsActivity_AddingInstrument"
-            android:label="@string/title_activity_maps__adding_instrument" />
-        <activity android:name=".ExploreActivity" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".FarmerLoginActivity" />
-        <activity android:name=".otpActivity" />
+            android:label="@string/title_activity_maps__adding_instrument"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ExploreActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".RegistrationActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".FarmerLoginActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".otpActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

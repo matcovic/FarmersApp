@@ -46,9 +46,11 @@
     <string name="cultivation">চাষাবাদ</string>
     <string name="poultry">পোল্ট্রি ফার্ম</string>
     <string name="suggestions">পরামর্শ</string>
+    <string name="news">কৃষি সংবাদ</string>
+    <string name="news_title">কৃ ষি সংবাদ</string>
     <string name="disease">শস্যের রোগসনাক্ত</string>
     <string name="mircoloan">মাইক্রো-লোন</string>
-    <string name="stories">সাফল্যতার জয়</string>
+    <string name="stories">সফলতার গল্প</string>
     <string name="howItWorks">অ্যাপটি কীভাবে কাজ করে?</string>
     <string name="learnMore">আরও জানুন</string>
 
@@ -182,9 +184,11 @@
     <string name="edit_profile">সম্পাদনা করুন</string>
     <string name="list_of_selling_text">আপনার বিক্রয়ের তালিকাঃ</string>
     <string name="no_sell_post">আপনি একটিও বিক্রয়ের পোস্ট দেননি</string>
-    <string name="per_hour_price">ঘন্টা প্রতি ভাড়াঃ</string>
+    <string name="per_hour_price">ঘন্টা প্রতি ভাড়া</string>
     <string name="register_instrument">সরঞ্জাম রেজিস্ট্রেশন</string>
-    <string name="upload_image_text">সরঞ্জামের একটি ছবি আপলোড করুন:</string>
+    <string name="category_instrument">সরঞ্জাম ক্যাটেগরি:</string>
+    <string name="upload_image_text">সরঞ্জামের ছবি:</string>
+    <string name="upload_here">এখানে আপলোড করুন</string>
     <string name="select_location">লোকেশন সিলেক্ট করার জন্যে এখানে ট্যাপ করুন</string>
     <string name="location">লোকেশন</string>
 
@@ -257,6 +261,9 @@
     <string name="technology">প্রযুক্তি</string>
     <string name="instrument">যন্ত্রপাতি</string>
     <string name="crop_nutrition">ফসলের পুষ্টি</string>
+    <string name="cultivation_related">চাষাবাদ সংক্রান্ত</string>
+    <string name="bhortuki">ভর্তুকি</string>
+    <string name="others">অন্যান্য</string>
 
 
 </resources>

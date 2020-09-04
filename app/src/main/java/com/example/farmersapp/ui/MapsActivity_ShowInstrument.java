@@ -2,6 +2,7 @@ package com.example.farmersapp.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -22,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -42,6 +44,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -51,6 +54,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -63,7 +67,14 @@ public class MapsActivity_ShowInstrument extends FragmentActivity implements OnM
     private String[] INSTRUMENT_TYPE_LIST = {"ধান রোপণ যন্ত্র", "ট্র্যাক্টর", "হাল চাষের মেশিন"}; //Strings must be in order
     //widgets
     private Button showCategoryButton;
-    private AlertDialog dialogForDetails; //dialog for instrument details
+
+    //Bottom sheet  widgets
+    private BottomSheetBehavior bottomSheetBehavior;
+    private ImageView showImageView, imgUpDown;
+    private Button contactOwnerButton;
+    private TextView showTypeTextView, showPriceTextView, showNameTextView, showNumberTextView, showAddrssTextView;
+    private CardView cardBottom;
+    private ProgressBar progressBarBtmSheet;
 
     //variables
     private GoogleMap mMap;
@@ -80,7 +91,7 @@ public class MapsActivity_ShowInstrument extends FragmentActivity implements OnM
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps_show_instrument);
+        setContentView(R.layout.bottom_sheet_instrument_details);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -102,6 +113,65 @@ public class MapsActivity_ShowInstrument extends FragmentActivity implements OnM
                 showInstrumentTypeSelectorDialog();
             }
         });
+
+        //for bottom sheet
+        cardBottom = findViewById(R.id.cardBottom);
+        bottomSheetBehavior = BottomSheetBehavior.from(cardBottom);
+        bottomSheetBehavior.setHideable(true);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        imgUpDown = findViewById(R.id.img_up_down);
+
+        showImageView = findViewById(R.id.showImageView);
+        showTypeTextView = findViewById(R.id.showTypeTextView);
+        showPriceTextView = findViewById(R.id.showPriceTextView);
+        showNameTextView = findViewById(R.id.showNameTextView);
+        showNumberTextView = findViewById(R.id.showNumberTextView);
+        showAddrssTextView = findViewById(R.id.showAddrssTextView);
+        contactOwnerButton = findViewById(R.id.contactOwnerButton);
+        progressBarBtmSheet = findViewById(R.id.progressBarBtmSheet);
+
+        imgUpDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    imgUpDown.setImageResource(R.drawable.ic_arrow_down_black);
+                }
+
+                if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    imgUpDown.setImageResource(R.drawable.ic_arrow_up_black);
+                }
+            }
+        });
+
+        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        break;
+                    case BottomSheetBehavior.STATE_COLLAPSED:
+                        imgUpDown.setImageResource(R.drawable.ic_arrow_up_black);
+                        break;
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        imgUpDown.setImageResource(R.drawable.ic_arrow_down_black);
+                        break;
+                    case BottomSheetBehavior.STATE_DRAGGING:
+                        break;
+                    case BottomSheetBehavior.STATE_HALF_EXPANDED:
+                        break;
+                    case BottomSheetBehavior.STATE_SETTLING:
+                        break;
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+
     }
 
     private void showInstrumentTypeSelectorDialog() {
@@ -149,12 +219,12 @@ public class MapsActivity_ShowInstrument extends FragmentActivity implements OnM
     }
 
     private void showInstrumentList(String type) {
-        for(Instrument instrument : instrumentList) {
-            if(instrument.getInstrumentType().equals(type)) {
+        for (Instrument instrument : instrumentList) {
+            if (instrument.getInstrumentType().equals(type)) {
                 LatLng latLng = new LatLng(instrument.getInstrumentGeoPoint().getLatitude(),
                         instrument.getInstrumentGeoPoint().getLongitude());
-                Log.d("Test","Using LatLng___"+latLng.latitude+"  "+latLng.longitude);
-                Log.d("Test",instrument.getInstrumentAddress());
+                Log.d("Test", "Using LatLng___" + latLng.latitude + "  " + latLng.longitude);
+                Log.d("Test", instrument.getInstrumentAddress());
 
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
@@ -172,18 +242,18 @@ public class MapsActivity_ShowInstrument extends FragmentActivity implements OnM
         collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if(e != null) {
-                    Log.e("Test","onEvent: Listen failed",e);
+                if (e != null) {
+                    Log.e("Test", "onEvent: Listen failed", e);
                 }
-                if(queryDocumentSnapshots != null) {
+                if (queryDocumentSnapshots != null) {
                     //Clear the list and add all the instruments again
                     instrumentList.clear();
                     instrumentList = new ArrayList<>();
-                    for(QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         Instrument instrument = doc.toObject(Instrument.class);
                         instrumentList.add(instrument);
                     }
-                    Log.d("Test", "onEvent: instrument list size: "+instrumentList.size());
+                    Log.d("Test", "onEvent: instrument list size: " + instrumentList.size());
                 }
             }
         });
@@ -199,7 +269,7 @@ public class MapsActivity_ShowInstrument extends FragmentActivity implements OnM
         mMap.setOnInfoWindowClickListener(this);
         mMap.setOnMarkerClickListener(this);
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
 
             enableUserLocation();
@@ -219,32 +289,52 @@ public class MapsActivity_ShowInstrument extends FragmentActivity implements OnM
                 layoutParams.setMargins(0, 30, 30, 0);
             }
 
-        }else {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+        } else {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}
                         , ACCESS_LOCATION_REQ_CODE);
-            }else {
-                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}
                         , ACCESS_LOCATION_REQ_CODE);
             }
         }
     }
 
     private void zoomToUserLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         Task<Location> locationTask = fusedLocationProviderClient.getLastLocation();
 
         locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                Log.d("Test","From zoomToUserLocation>>>> LATLNG:" +location.getLatitude()+"   "+location.getLongitude());
+                Log.d("Test", "From zoomToUserLocation>>>> LATLNG:" + location.getLatitude() + "   " + location.getLongitude());
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
             }
         });
     }
 
     private void enableUserLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         mMap.setMyLocationEnabled(true);
     }
 
@@ -267,38 +357,28 @@ public class MapsActivity_ShowInstrument extends FragmentActivity implements OnM
     }
 
     private void getMoreDetails(final Instrument instrument) {
-        ImageView showImageView;
-        Button dismissButton, contactOwnerButton;
-        TextView showTypeTextView, showPriceTextView, showNameTextView, showNumberTextView, showAddrssTextView;
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-
-        View view = getLayoutInflater().inflate(R.layout.pop_window_instrument_details,null);
-
-        dismissButton = view.findViewById(R.id.dismissPop);
-        showImageView = view.findViewById(R.id.showImageView);
-        showTypeTextView = view.findViewById(R.id.showTypeTextView);
-        showPriceTextView = view.findViewById(R.id.showPriceTextView);
-        showNameTextView = view.findViewById(R.id.showNameTextView);
-        showNumberTextView = view.findViewById(R.id.showNumberTextView);
-        showAddrssTextView = view.findViewById(R.id.showAddrssTextView);
-        contactOwnerButton = view.findViewById(R.id.contactOwnerButton);
+        progressBarBtmSheet.setVisibility(View.VISIBLE);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         StringBuilder price = new StringBuilder(instrument.getInstrumentPrice());
 
-        Picasso.get().load(instrument.getInstrumentImageUrl()).fit().into(showImageView);
+        Picasso.get().load(instrument.getInstrumentImageUrl()).fit().into(showImageView, new Callback() {
+            @Override
+            public void onSuccess() {
+                progressBarBtmSheet.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                e.printStackTrace();
+            }
+        });
+
         showTypeTextView.setText(instrument.getInstrumentType());
         showPriceTextView.setText(price.append(" টাকা"));
         showNameTextView.setText(instrument.getOwnerName());
         showNumberTextView.setText(instrument.getOwnerPhone());
         showAddrssTextView.setText(instrument.getInstrumentAddress());
-
-        dismissButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialogForDetails.dismiss();
-            }
-        });
-
         contactOwnerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -308,11 +388,6 @@ public class MapsActivity_ShowInstrument extends FragmentActivity implements OnM
                 startActivity(dialIntent);
             }
         });
-
-        dialogBuilder.setView(view);
-        dialogForDetails = dialogBuilder.create();
-        dialogForDetails.setCanceledOnTouchOutside(false);
-        dialogForDetails.show();
     }
 
     @Override
@@ -331,4 +406,12 @@ public class MapsActivity_ShowInstrument extends FragmentActivity implements OnM
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }else {
+            super.onBackPressed();
+        }
+    }
 }

@@ -280,7 +280,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/categories"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
 
@@ -344,10 +345,10 @@
                                 android:elevation="8dp">
 
                                 <ImageView
-                                    android:id="@+id/click_suggestion"
+                                    android:id="@+id/click_news"
                                     android:layout_width="60dp"
                                     android:layout_height="60dp"
-                                    android:src="@drawable/suggestion"
+                                    android:src="@drawable/news"
                                     android:layout_centerInParent="true"/>
                             </RelativeLayout>
 
@@ -356,7 +357,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:textAlignment="center"
-                                android:text="@string/suggestions"/>
+                                android:text="@string/news"/>
 
                         </LinearLayout>
 
@@ -398,11 +399,13 @@
                         android:orientation="horizontal"
                         android:layout_gravity="center">
 
+<!--                        Disease visibility gone-->
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:layout_marginRight="30dp">
+                            android:layout_marginRight="30dp"
+                            android:visibility="gone">
 
                             <RelativeLayout
                                 android:layout_width="75dp"
@@ -429,10 +432,12 @@
 
                         </LinearLayout>
 
+<!--                        microloan visibility gone-->
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <RelativeLayout
                                 android:layout_width="75dp"
@@ -458,11 +463,14 @@
                                 android:text="@string/mircoloan"/>
 
                         </LinearLayout>
+
+<!--                        Poultry visibility gone-->
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:layout_marginLeft="30dp">
+                            android:layout_marginLeft="30dp"
+                            android:visibility="gone">
 
                             <RelativeLayout
                                 android:layout_width="75dp"
@@ -538,6 +546,7 @@
                             android:id="@+id/learnMore"
                             android:foreground="?attr/selectableItemBackground"
                             android:background="@drawable/learn_more_button_transperancy"
+                            android:backgroundTint="@color/red_wine"
                             android:layout_margin="15dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -564,17 +573,13 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:text="@string/stories"/>
+                    android:text="@string/stories"
+                    android:textColor="@color/black"/>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_stories"
+                    android:id="@+id/successStoriesRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                </androidx.recyclerview.widget.RecyclerView>
-
-
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 

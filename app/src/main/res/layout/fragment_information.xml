@@ -31,7 +31,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="12dp"
+                android:background="@drawable/ripple_effect">
 
                 <ImageView
                     android:layout_width="80dp"
@@ -67,7 +68,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="12dp"
+                android:background="@drawable/ripple_effect">
 
                 <ImageView
                     android:layout_width="80dp"
@@ -103,7 +105,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="12dp"
+                android:background="@drawable/ripple_effect">
 
                 <ImageView
                     android:layout_width="80dp"
@@ -139,7 +142,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="12dp"
+                android:background="@drawable/ripple_effect">
 
                 <ImageView
                     android:layout_width="80dp"
@@ -175,7 +179,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="12dp"
+                android:background="@drawable/ripple_effect">
 
                 <ImageView
                     android:layout_width="80dp"
@@ -211,7 +216,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="12dp"
+                android:background="@drawable/ripple_effect">
 
                 <ImageView
                     android:layout_width="98dp"
@@ -247,7 +253,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="12dp"
+                android:background="@drawable/ripple_effect">
 
                 <ImageView
                     android:layout_width="80dp"

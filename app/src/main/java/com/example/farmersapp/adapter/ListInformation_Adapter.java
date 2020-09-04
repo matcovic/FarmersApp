@@ -37,7 +37,7 @@ public class ListInformation_Adapter extends RecyclerView.Adapter<ListInformatio
     String status;
     public static final String INFO_DETAILS_BRIEF = "infoDetailsBrief";
     public static final String INFO_DETAILS_TITLE = "infoDetailsTitle";
-    public static final String INFO_DETAILS_PHOTO = "infoDetailsPhoto";
+    public static final String  INFO_DETAILS_PHOTO = "infoDetailsPhoto";
     public static final String INFO_STATUS = "infoStatus";
 
     public ListInformation_Adapter(List<InformationItem> mData, Context mContext, String status) {
