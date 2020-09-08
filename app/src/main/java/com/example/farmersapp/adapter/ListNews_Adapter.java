@@ -150,10 +150,6 @@ public class ListNews_Adapter extends RecyclerView.Adapter<ListNews_Adapter.View
             textViewTimeStamp = itemView.findViewById(R.id.newsTimeStamp_textView);
             linearLayoutNews = itemView.findViewById(R.id.lineatLayout_news);
 
-
-
-
-
         }
     }
 }

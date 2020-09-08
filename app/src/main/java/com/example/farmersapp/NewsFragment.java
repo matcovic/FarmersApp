@@ -1,5 +1,6 @@
 package com.example.farmersapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.farmersapp.adapter.ListNews_Adapter;
 import com.example.farmersapp.model.NewsItem;
@@ -29,7 +31,7 @@ public class NewsFragment extends Fragment {
 
     private MaterialCardView cultivationRelated_Button, bhortuki_Button, others_Button;
     private RecyclerView newsRecyclerView;
-
+TextView totalCountCultivationNewsTextView,totalCountFundingTextView,totalCountOthersTextView;
 
     private ListNews_Adapter adapter;
 
@@ -39,7 +41,11 @@ public class NewsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     FirebaseFirestore firebaseFirestore;
-    List<NewsItem> mData;
+    List<NewsItem> mDataCultivationNews;
+    List<NewsItem> mDataFundingNews;
+    List<NewsItem> mDataOthersNews;
+    List<NewsItem > mData;
+
 
 
 
@@ -81,7 +87,16 @@ public class NewsFragment extends Fragment {
         bhortuki_Button = view.findViewById(R.id.bhortuki_Button);
         others_Button = view.findViewById(R.id.others_Button);
         newsRecyclerView = view.findViewById(R.id.newsRecyclerView);
+        totalCountCultivationNewsTextView = view.findViewById(R.id.totalContentCultivation_textView);
+        totalCountFundingTextView = view.findViewById(R.id.totalContentBhortuki_textView);
+        totalCountOthersTextView = view.findViewById(R.id.totalContentOthers_textView);
+
+
+
         firebaseFirestore = FirebaseFirestore.getInstance();
+        mDataCultivationNews = new ArrayList<>();
+        mDataFundingNews = new ArrayList<>();
+        mDataOthersNews = new ArrayList<>();
         mData = new ArrayList<>();
 
         final CollectionReference cultivationRelatedNewsCollectionReference = firebaseFirestore.collection("Cultivation_Related_News");
@@ -89,54 +104,20 @@ public class NewsFragment extends Fragment {
         final CollectionReference otherNewsCollectionReference = firebaseFirestore.collection("Others_News");
 
         setUpRecyclerViewManual();
-        getDataToArray(cultivationRelatedNewsCollectionReference,ListNews_Adapter.CULTIVATION_RELATED_NEWS);
-        cultivationRelated_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            getDataToArray(cultivationRelatedNewsCollectionReference,ListNews_Adapter.CULTIVATION_RELATED_NEWS);
-
-            }
-        });
-
-        bhortuki_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDataToArray(fundingNewsCollectionReference,ListNews_Adapter.FUNDING_NEWS);
-
-            }
-        });
-
-        others_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            getDataToArray(otherNewsCollectionReference,ListNews_Adapter.OTHERS_NEWS);
-            }
-        });
 
 
-
-
-        return view;
-    }
-
-    private void getDataToArray(CollectionReference temp, final int status) {
-        mData.clear();
-
-        temp.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        cultivationRelatedNewsCollectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @SuppressLint({"LongLogTag", "SetTextI18n"})
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots.isEmpty()) {
                     Log.d("checked", "database is empty");
                 } else {
                     List<NewsItem> data = queryDocumentSnapshots.toObjects(NewsItem.class);
-                    adapter = new ListNews_Adapter(mData, getContext(),status);
-                    newsRecyclerView.setAdapter(adapter);
-                    mData.addAll(data);
-                   adapter.notifyDataSetChanged();
-            Log.d("checked mdata size", String.valueOf(mData.size()));
+                    mDataCultivationNews.addAll(data);
+                    totalCountFundingTextView.setText(HomeFragment.digitConversionEngToBangla(mDataCultivationNews.size()));
+                    Log.d("checked mdata cultivation size", String.valueOf(mDataCultivationNews.size()));
                 }
-
 
             }
 
@@ -148,6 +129,90 @@ public class NewsFragment extends Fragment {
         });
 
 
+
+        fundingNewsCollectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @SuppressLint({"LongLogTag", "SetTextI18n"})
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots.isEmpty()) {
+                    Log.d("checked", "database is empty");
+                } else {
+                    List<NewsItem> data = queryDocumentSnapshots.toObjects(NewsItem.class);
+
+                    mDataFundingNews.addAll(data);
+                    adapter = new ListNews_Adapter(mDataCultivationNews, getContext(),ListNews_Adapter.CULTIVATION_RELATED_NEWS);
+                    newsRecyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    totalCountCultivationNewsTextView.setText(HomeFragment.digitConversionEngToBangla(mDataFundingNews.size()));
+                    Log.d("checked mdata funding size", String.valueOf(mDataFundingNews.size()));
+                }
+
+            }
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("checked", "data load failed");
+            }
+        });
+
+        otherNewsCollectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @SuppressLint({"LongLogTag", "SetTextI18n"})
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots.isEmpty()) {
+                    Log.d("checked", "database is empty");
+                } else {
+                    List<NewsItem> data = queryDocumentSnapshots.toObjects(NewsItem.class);
+                    mDataOthersNews.addAll(data);
+                    Log.d("checked mdata others size", String.valueOf(mDataOthersNews.size()));
+                    totalCountOthersTextView.setText(HomeFragment.digitConversionEngToBangla(mDataOthersNews.size()));
+                }
+
+            }
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("checked", "data load failed");
+            }
+        });
+
+
+        cultivationRelated_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                adapter = new ListNews_Adapter(mDataCultivationNews, getContext(),ListNews_Adapter.CULTIVATION_RELATED_NEWS);
+                newsRecyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+            }
+        });
+
+        bhortuki_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter = new ListNews_Adapter(mDataFundingNews, getContext(),ListNews_Adapter.FUNDING_NEWS);
+                newsRecyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+            }
+        });
+
+        others_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter = new ListNews_Adapter(mDataOthersNews, getContext(),ListNews_Adapter.OTHERS_NEWS);
+                newsRecyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+
+
+
+        return view;
     }
 
     private void setUpRecyclerViewManual() {

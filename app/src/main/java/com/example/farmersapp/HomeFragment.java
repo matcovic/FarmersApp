@@ -516,7 +516,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     v.startAnimation(animShake);
   }
 
-  public String digitConversionEngToBangla(int value) {
+  public static String digitConversionEngToBangla(int value) {
     StringBuilder result = new StringBuilder();
     String temp = Integer.toString(value);
 
