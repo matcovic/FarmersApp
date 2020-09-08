@@ -1,5 +1,6 @@
 package com.example.farmersapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -165,6 +166,7 @@ public class UserProfileFragment extends Fragment {
 
         DocumentReference docRef = usersCollectionRef.document(mUserId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {

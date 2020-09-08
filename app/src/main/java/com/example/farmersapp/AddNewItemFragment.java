@@ -716,6 +716,7 @@ public class AddNewItemFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == IMAGE_PICKER_SELECT
                 && resultCode == Activity.RESULT_OK) {
             String path = getPathFromCameraData(data, this.requireActivity());
