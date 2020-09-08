@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddNewBlogFragment">
+    tools:context=".AddNewBlogFragment"
+    android:layout_margin="10dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -54,16 +55,29 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/editText_post"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="191dp"
-                android:layout_weight="1"
-                android:hint="Post"
-                android:inputType="textMultiLine"
-                android:overScrollMode="always"
-                android:scrollbarStyle="insideInset"
-                android:scrollbars="vertical" />
+                android:layout_height="wrap_content"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/black"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="5dp">
+
+                <EditText
+                    android:id="@+id/editText_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="পোস্ট লিখুন..."
+                    android:inputType="textMultiLine"
+                    android:lines="7"
+                    android:gravity="top"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:padding="8dp"
+                    android:textSize="14sp"/>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,19 +86,21 @@
 
                 <TextView
                     android:id="@+id/textView11"
-                    android:layout_width="38dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Add Pictures:"
-                    android:textSize="24sp" />
+                    android:text="ছবি প্রদান করুন:"
+                    android:textSize="24sp"
+                    android:layout_gravity="center"/>
 
                 <ImageButton
                     android:id="@+id/imageButton_add_pic"
-                    android:layout_width="120dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_add_photo"
-                    android:text="Button" />
+                    android:text="Button"
+                    android:layout_gravity="center"/>
 
             </LinearLayout>
 
@@ -106,7 +122,7 @@
                 android:id="@+id/button_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Post" />
+                android:text="পোস্ট দিন" />
 
         </LinearLayout>
     </ScrollView>

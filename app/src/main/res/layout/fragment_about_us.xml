@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutUsFragment"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_margin="15dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Farmer's App"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:fontFamily="@font/antic"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/holo_blue_dark"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="200dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fahim Shahriyar (18.01.04.001)"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/baloo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shahariar Badhon (18.01.04.004)"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/baloo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="S. S. Saruar Jahan (18.01.04.008)"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/baloo"/>
+
+
+
+</LinearLayout>

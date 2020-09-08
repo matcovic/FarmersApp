@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">FarmersApp</string>
+    <string name="app_name">Farmer\'s App</string>
     <string name="your_name">নাম:</string>
     <string name="your_phoneno">মোবাইল নম্বর:</string>
     <string name="login_as_farmerText">কৃষিজীবী হিসেবে লগ ইন করুন</string>
@@ -264,6 +264,7 @@
     <string name="cultivation_related">চাষাবাদ সংক্রান্ত</string>
     <string name="bhortuki">ভর্তুকি</string>
     <string name="others">অন্যান্য</string>
+    <string name="write_your_comment">আপনার কমেন্ট লিখুন...</string>
 
 
 </resources>

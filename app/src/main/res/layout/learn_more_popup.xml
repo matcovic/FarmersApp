@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/dismissButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_close_black"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/learnMoreSlider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:auto_cycle="false"
+                app:corner_radius="5"
+                app:delay="0"
+                app:period="2000"/>
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

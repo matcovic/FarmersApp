@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -106,7 +107,7 @@ public class DataLoadActivity extends AppCompatActivity {
 
         imagesTips = new ArrayList<>();
 
-        mButton = findViewById(R.id.next_button);
+//        mButton = findViewById(R.id.next_button);
 
         mData = new ArrayList<>();
         mDataDisease = new ArrayList<>();
@@ -115,12 +116,19 @@ public class DataLoadActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        mButton.setOnClickListener(new View.OnClickListener() {
+//        mButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sendUserhome();
+//             }
+//        });
+
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
+            public void run() {
                 sendUserhome();
-             }
-        });
+            }
+        }, 6000);
 
         imagesTips.add(CROP_CARE_TIPS);
         imagesTips.add(CROP_PLANT_TIPS);

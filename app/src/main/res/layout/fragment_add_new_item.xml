@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:gravity="center"
+    android:gravity="center"
     tools:context=".AddNewItemFragment">
 
 
@@ -12,13 +12,13 @@ android:gravity="center"
         android:id="@+id/scrollview_item_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#d8ebb5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        android:background="#e8f6e9">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -189,8 +189,8 @@ android:gravity="center"
 
                 <Button
                     android:id="@+id/button_submit"
-                    android:layout_width="99dp"
-                    android:layout_height="41dp"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/oval_button_shape"
                     android:elevation="10dp"
@@ -200,8 +200,8 @@ android:gravity="center"
 
                 <Button
                     android:id="@+id/button_preview"
-                    android:layout_width="99dp"
-                    android:layout_height="41dp"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/oval_button_shape"
                     android:elevation="50dp"
                     android:text="Preview"

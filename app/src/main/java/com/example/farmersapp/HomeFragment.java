@@ -1,6 +1,7 @@
 package com.example.farmersapp;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -32,6 +33,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androdocs.httprequest.HttpRequest;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.farmersapp.adapter.ListSuccessStories_Adapter;
 import com.example.farmersapp.model.SuccessStories;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -97,6 +100,10 @@ public class HomeFragment extends Fragment implements LocationListener {
   private ProgressBar loader;
   private CardView mainContainer;
   private LinearLayout weather_Layout1, weather_Layout2;
+
+  //Learn more
+  private AlertDialog.Builder dialogBuilder;
+  private AlertDialog dialog;
 
   FragmentManager fragmentManager;
 
@@ -505,6 +512,30 @@ public class HomeFragment extends Fragment implements LocationListener {
     learnMore.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        dialogBuilder = new AlertDialog.Builder(getActivity());
+        View view = getLayoutInflater().inflate(R.layout.learn_more_popup,null);
+
+        Button dismissButton = view.findViewById(R.id.dismissButton);
+        ImageSlider learnMoreSlider = view.findViewById(R.id.learnMoreSlider);
+
+        List<SlideModel> slideModels = new ArrayList<>();
+        slideModels.add(new SlideModel(R.drawable.learnmore_1));
+        slideModels.add(new SlideModel(R.drawable.learnmore_2));
+        slideModels.add(new SlideModel(R.drawable.learnmore_3));
+        slideModels.add(new SlideModel(R.drawable.learnmore_4));
+        slideModels.add(new SlideModel(R.drawable.learnmore_5));
+        slideModels.add(new SlideModel(R.drawable.learnmore_6));
+        learnMoreSlider.setImageList(slideModels,true);
+
+        dismissButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            dialog.dismiss();
+          }
+        });
+        dialogBuilder.setView(view);
+        dialog = dialogBuilder.create();
+        dialog.show();
       }
     });
 

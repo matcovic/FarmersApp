@@ -18,19 +18,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
 
         <EditText
             android:id="@+id/editText_Comment"
             android:layout_width="336dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:inputType="textPersonName" />
+            android:hint="@string/write_your_comment"/>
 
         <Button
             android:id="@+id/Button_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send" />
+            android:text="পোস্ট" />
     </LinearLayout>
 </RelativeLayout>
