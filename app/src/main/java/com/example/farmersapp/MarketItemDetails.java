@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class MarketItemDetails extends Fragment {
     private TextView textViewOwnerNumber, textViewProductDescription, TextViewProductConditionTypeLebel;
     private Context mContext;
     private SliderView sliderView;
-    private ImageButton imageButton;
+    private Button imageButton;
     ViewPagerImage_MarketDetails_Adapter viewPagerImageAdapter;
     String phoneNumner;
 
@@ -156,10 +157,9 @@ public class MarketItemDetails extends Fragment {
                 imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String call = "tel:" + phoneNumner;
-                        Intent intent = new Intent(Intent.ACTION_CALL);
-                        intent.setData(Uri.parse(call));
-                        startActivity(intent);
+                        Intent dialIntent = new Intent(Intent.ACTION_DIAL);
+                        dialIntent.setData(Uri.parse("tel:" + Uri.encode(phoneNumner)));
+                        startActivity(dialIntent);
 
                     }
                 });

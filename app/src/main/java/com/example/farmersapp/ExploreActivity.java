@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
@@ -134,11 +135,9 @@ public class ExploreActivity extends AppCompatActivity implements NavigationView
                 openFragment(UserProfileFragment.newInstance("", ""));
                 break;
             case R.id.nav_aboutUs:
-
+                openFragment(AboutUsFragment.newInstance("", ""));
                 break;
             case R.id.nav_signout:
-
-
                 firebaseAuth.getInstance().signOut();
                 Intent i = new Intent(getBaseContext(),
                         MainActivity.class);

@@ -86,6 +86,10 @@ dependencies {
     implementation 'com.github.androdocs:Simple-HTTP-Request:v1.0'
     //multi line collapsing toolbar
     implementation 'net.opacapp:multiline-collapsingtoolbar:27.1.1'
+    //expansion panel
+    implementation 'com.github.florent37:expansionpanel:1.0.3'
+
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.0.6'
 
 
     testImplementation 'junit:junit:4.12'

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp">
-
+    android:layout_margin="5dp">
 
     <ImageView
         android:id="@+id/imageView_item_market"
@@ -17,15 +16,14 @@
         app:layout_constraintEnd_toStartOf="@+id/container"
         app:layout_constraintStart_toStartOf="@+id/container"
         app:layout_constraintTop_toTopOf="@+id/container"
-
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item_container_market"
         android:layout_width="279dp"
-        android:layout_height="135dp"
-
-        android:background="@drawable/shadow"
+        android:layout_height="137dp"
+        android:background="#e8f6e9"
         android:elevation="8dp"
         android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"

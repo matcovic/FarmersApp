@@ -5,23 +5,31 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d8ebb5"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/market_rv"
-        android:layout_width="411dp"
-        android:layout_height="645dp"
-        android:layout_marginEnd="8dp"
-        android:background="#d8ebb5"
-        app:layout_constraintBottom_toBottomOf="parent"
+        <EditText
+            android:id="@+id/search_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/search_input_style"
+            android:drawableLeft="@drawable/ic_search_gray_24dp"
+            android:elevation="10dp"
+            android:hint="search"
+            android:inputType="textPersonName"
+            android:textColor="@color/content_text_color" />
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_input"
-        tools:listitem="@layout/customlist_item_market" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/market_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/customlist_item_market" />
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton_blog"
@@ -36,27 +44,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.931" />
-
-    <EditText
-        android:id="@+id/search_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/search_input_style"
-        android:backgroundTint="#D8EBB5"
-        android:drawableLeft="@drawable/ic_search_gray_24dp"
-
-        android:elevation="10dp"
-
-
-        android:hint="search"
-        android:inputType="textPersonName"
-        android:textColor="@color/content_text_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
