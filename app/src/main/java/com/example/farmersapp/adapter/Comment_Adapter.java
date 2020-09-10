@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.farmersapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -34,7 +35,7 @@ public class Comment_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context mContext;
     private List<Map<String, String>> items;
     private CollectionReference collectionReferenceComment,collectionReferenceBlog;
-
+    FirebaseAuth mAuth;
     public static final String TAG = "checked";
 
 
@@ -43,6 +44,7 @@ public class Comment_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.items = items;
         collectionReferenceComment = FirebaseFirestore.getInstance().collection("Comment");
         collectionReferenceBlog = FirebaseFirestore.getInstance().collection("Blog");
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public Comment_Adapter() {
@@ -65,7 +67,18 @@ public class Comment_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         commentViewHolder.commentExpandableTextView.setText(items.get(position).get("comment"));
         commentViewHolder.commentEditText.setVisibility(View.GONE);
 
+        String commentUid = items.get(position).get("userId");
         commentViewHolder.saveCancelButtonsLayout.setVisibility(View.GONE);
+
+
+        if(Objects.equals(commentUid,mAuth.getUid()))
+        {
+           commentViewHolder.editRemoveButtonsLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            commentViewHolder.editRemoveButtonsLayout.setVisibility(View.GONE);
+        }
 
         commentViewHolder.editImageButton.setOnClickListener(new View.OnClickListener() {
             @Override

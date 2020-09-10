@@ -176,7 +176,7 @@ public class AddNewItemFragment extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference();
 
 
-        databaseReferenceId = firebaseFirestore.document("productId/currectId");
+        databaseReferenceId = firebaseFirestore.document("productId/currentId");
 
         databaseReferenceId.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override

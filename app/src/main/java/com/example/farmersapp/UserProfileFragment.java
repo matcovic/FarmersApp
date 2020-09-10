@@ -130,6 +130,7 @@ public class UserProfileFragment extends Fragment {
                     recyclerView_mySelling_items.setAdapter(listMySellingItemsAdapter);
                     Log.d(TAG, String.valueOf(tempList));
 
+                    Log.d(TAG,"selling item size"+data.size());
                     for (productsListOfMarketFirestore currentData : data) {
                         Log.d(TAG, currentData.getProductId());
 

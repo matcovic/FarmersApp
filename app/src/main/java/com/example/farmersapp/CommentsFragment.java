@@ -48,6 +48,7 @@ public class CommentsFragment extends Fragment {
     private String mParam2;
     private String blogId;
     private String ownerName;
+    private String blogOwnerName;
 
     private RecyclerView recyclerViewComment;
     private Button sendButton;
@@ -56,7 +57,7 @@ public class CommentsFragment extends Fragment {
 
     Comment_Adapter adapter;
     List<Map<String, String>> mCommentItems;
-
+    FirebaseFirestore firebaseFirestore;
     private FirebaseAuth mAuth;
 
 
@@ -80,7 +81,7 @@ public class CommentsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
             blogId = getArguments().getString(ARG_Blog);
-            ownerName = getArguments().getString(ARG_OWNER_NAME);
+           blogOwnerName = getArguments().getString(ARG_OWNER_NAME);
 
 
         }
@@ -97,8 +98,11 @@ public class CommentsFragment extends Fragment {
         editTextComment = contentView.findViewById(R.id.editText_Comment);
         recyclerViewComment = contentView.findViewById(R.id.recyclerView_comment);
         mCommentItems = new ArrayList<>();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         mAuth = FirebaseAuth.getInstance();
+        final CollectionReference usersCollectionRef = firebaseFirestore.collection("users");
+
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +114,21 @@ public class CommentsFragment extends Fragment {
                     CommentItemDetails newComment = new CommentItemDetails(mAuth.getUid(), editTextComment.getText().toString(), ownerName, blogId);
 
 //                    collectionReferenceBlog.document(blogId).update("commentList", FieldValue.arrayUnion(newComment));
+
+
                     Map<String, String> newData = new HashMap<>();
+                    usersCollectionRef.document(mAuth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            ownerName = (String) documentSnapshot.get("name");
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
                     newData.put("name", ownerName);
                     newData.put("comment", editTextComment.getText().toString());
                     newData.put("userId", mAuth.getUid());
@@ -128,22 +146,20 @@ public class CommentsFragment extends Fragment {
 
                     collectionReferenceBlog.document(blogId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         long commentCount;
+
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if(documentSnapshot.exists())
-                            {
+                            if (documentSnapshot.exists()) {
                                 commentCount = documentSnapshot.getLong("comment");
                                 commentCount++;
 
-                                collectionReferenceBlog.document(blogId).update("comment",commentCount);
+                                collectionReferenceBlog.document(blogId).update("comment", commentCount);
 
-                            }
-                            else {
-                                Log.d(TAG,"comment doesn't exist");
+                            } else {
+                                Log.d(TAG, "comment doesn't exist");
                             }
                         }
                     });
-
 
 
                 }
