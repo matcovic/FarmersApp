@@ -41,7 +41,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="Name" />
+                        android:text="Name"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/textView_date"
@@ -55,29 +56,27 @@
 
             </LinearLayout>
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/black"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="5dp">
-
-                <EditText
-                    android:id="@+id/editText_post"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="পোস্ট লিখুন..."
-                    android:inputType="textMultiLine"
-                    android:lines="7"
-                    android:gravity="top"
-                    android:overScrollMode="always"
-                    android:scrollbarStyle="insideInset"
-                    android:scrollbars="vertical"
-                    android:padding="8dp"
-                    android:textSize="14sp"/>
+                    android:layout_margin="5dp">
 
-            </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editText_post"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:inputType="textMultiLine"
+                        android:lines="12"
+                        android:gravity="top"
+                        android:overScrollMode="always"
+                        android:scrollbarStyle="insideInset"
+                        android:scrollbars="vertical"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
