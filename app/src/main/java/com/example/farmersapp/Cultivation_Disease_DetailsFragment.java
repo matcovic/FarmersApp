@@ -18,7 +18,9 @@ import com.example.farmersapp.model.CustomListItem_Diseases;
 public class Cultivation_Disease_DetailsFragment extends Fragment {
 
     //Widgets
-    private TextView diseaseTitle_details, diseaseArticle_details;
+    private TextView diseaseTitle_details, diseaseType_details, diseaseScienteficName_details,
+            diseaseBrief_details, diseaseCause_details, diseaseChemicalControl_details,
+            diseaseBiologicalControl_details;
     private ImageView diseaseImage_details;
     CustomListItem_Diseases mData;
 
@@ -67,7 +69,12 @@ public class Cultivation_Disease_DetailsFragment extends Fragment {
 
         //Invoking widgets
         diseaseTitle_details = convertView.findViewById(R.id.diseaseTitle_details);
-        diseaseArticle_details = convertView.findViewById(R.id.diseaseArticle_details);
+        diseaseType_details = convertView.findViewById(R.id.diseaseType_details);
+        diseaseScienteficName_details = convertView.findViewById(R.id.diseaseScienteficName_details);
+        diseaseBrief_details = convertView.findViewById(R.id.diseaseBrief_details);
+        diseaseCause_details = convertView.findViewById(R.id.diseaseCause_details);
+        diseaseChemicalControl_details = convertView.findViewById(R.id.diseaseChemicalControl_details);
+        diseaseBiologicalControl_details = convertView.findViewById(R.id.diseaseBiologicalControl_details);
         diseaseImage_details = convertView.findViewById(R.id.diseaseImage_details);
 
         byte[] decodedByte = Base64.decode(mData.getDiseasePhoto(), 0);
