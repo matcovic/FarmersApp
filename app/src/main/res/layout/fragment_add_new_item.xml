@@ -116,39 +116,53 @@
 
             </RadioGroup>
 
-
-            <EditText
-                android:id="@+id/editText_title"
-                android:layout_width="327dp"
-                android:layout_height="41dp"
-                android:layout_marginBottom="30dp"
-                android:ems="10"
-                android:hint="Title"
-                android:inputType="textPersonName"
-                app:layout_constraintHorizontal_bias="0.476"
-                app:layout_constraintVertical_bias="0.344" />
-
-            <EditText
-                android:id="@+id/editText_description"
-                android:layout_width="334dp"
-                android:layout_height="98dp"
-                android:layout_marginBottom="30dp"
-                android:ems="10"
-                android:hint="Description"
-                android:inputType="text|textMultiLine"
-                app:layout_constraintHorizontal_bias="0.545"
-                app:layout_constraintVertical_bias="0.473" />
-
-            <EditText
-                android:id="@+id/editText_price"
-                android:layout_width="169dp"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:ems="10"
-                android:hint="Price"
-                android:inputType="textPersonName"
-                app:layout_constraintHorizontal_bias="0.173"
-                app:layout_constraintVertical_bias="0.588" />
+                android:hint="পদবি"
+                android:layout_marginBottom="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:inputType="textPersonName" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="বিবরণ"
+                android:layout_marginBottom="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:inputType="text|textMultiLine" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="দাম"
+                android:layout_marginBottom="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:inputType="textPersonName" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <TextView

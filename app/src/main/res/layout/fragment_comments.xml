@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".CommentsFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_comment"
         android:layout_width="match_parent"
@@ -19,18 +18,31 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        android:layout_alignBottom="@+id/recyclerView_comment">
 
-        <EditText
-            android:id="@+id/editText_Comment"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="336dp"
-            android:layout_height="match_parent"
-            android:hint="@string/write_your_comment"/>
+            android:layout_height="wrap_content"
+            android:hint="@string/write_your_comment"
+           >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_Comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/Button_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="পোস্ট" />
+            android:text="পোস্ট"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 </RelativeLayout>

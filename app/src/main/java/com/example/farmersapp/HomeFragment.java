@@ -315,7 +315,30 @@ public class HomeFragment extends Fragment implements LocationListener {
         /* Populating extracted data into our views */
         addressTxt.setText(address);
         updated_atTxt.setText(updatedAtText);
-        statusTxt.setText(weatherDescription.toUpperCase());
+
+        if(weatherDescription.equals("shower rain") || weatherDescription.equals("moderate rain") || weatherDescription.equals("very heavy rain")
+                || weatherDescription.equals("heavy intensity rain") || weatherDescription.equals("extreme rain"))
+          statusTxt.setText("প্রচণ্ড বৃষ্টি");
+        else if(weatherDescription.equals("rain") || weatherDescription.equals("light rain") || weatherDescription.equals("ragged shower rain") || weatherDescription.equals("light intensity shower rain"))
+          statusTxt.setText("বৃষ্টি");
+        else if(weatherDescription.equals("thunderstorm") || weatherDescription.equals("light thunderstorm") || weatherDescription.equals("thunderstorm with heavy drizzle")
+                || weatherDescription.equals("thunderstorm with rain") || weatherDescription.equals("thunderstorm with heavy rain")
+                || weatherDescription.equals("thunderstorm with light drizzle")  )
+          statusTxt.setText("প্রচণ্ড বজ্রপাত ও বৃষ্টি");
+        else if(weatherDescription.equals("mist"))
+          statusTxt.setText("কুয়াশাচ্ছন্ন");
+        else if(weatherDescription.equals("clear sky"))
+          statusTxt.setText("পরিষ্কার আকাশ");
+        else if(weatherDescription.equals("scattered clouds") || weatherDescription.equals("broken clouds") || weatherDescription.equals("few clouds")
+                || weatherDescription.equals("overcast clouds"))
+          statusTxt.setText("মেঘাচ্ছন্ন");
+        else if(weatherDescription.equals("drizzle") || weatherDescription.equals("drizzle rain") || weatherDescription.equals("shower drizzle")
+                || weatherDescription.equals("light intensity drizzle rain") || weatherDescription.equals("heavy intensity drizzle") || weatherDescription.equals("shower rain and drizzle")
+                || weatherDescription.equals("heavy shower rain and drizzle") || weatherDescription.equals("heavy intensity drizzle rain"))
+          statusTxt.setText("ঝরঝরে বৃষ্টি");
+        else
+          statusTxt.setText(weatherDescription.toUpperCase());
+
         tempTxt.setText(temp);
         temp_minTxt.setText(tempMin);
         temp_maxTxt.setText(tempMax);
