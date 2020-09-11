@@ -21,8 +21,10 @@ import com.example.farmersapp.FarmerLoginActivity;
 import com.example.farmersapp.R;
 import com.example.farmersapp.model.BlogItem;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -46,7 +48,8 @@ public class ListBlogItem_Adapter extends RecyclerView.Adapter<RecyclerView.View
     FirebaseAuth mAuth;
     DocumentReference documentReferenceUser;
     FirebaseFirestore firebaseFirestore;
-
+    String commentOwnerName;
+    public static final String COMMENT_OWNER_NAME = "commentOwnerName";
 
 
 
@@ -56,6 +59,40 @@ public class ListBlogItem_Adapter extends RecyclerView.Adapter<RecyclerView.View
         mAuth = FirebaseAuth.getInstance();
         documentReferenceUser = FirebaseFirestore.getInstance().collection("users").document(Objects.requireNonNull(mAuth.getUid()));
         firebaseFirestore = FirebaseFirestore.getInstance();
+        documentReferenceUser.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if(task.isSuccessful())
+                {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+
+                    if(documentSnapshot.exists())
+                    {
+                        commentOwnerName = (String) documentSnapshot.get("name");
+                        Log.d("checked ownername",commentOwnerName);
+
+                    }
+                    else
+                    {
+                        Log.d(TAG, "No such document");
+                    }
+
+
+                }
+                else
+                {
+                    Log.d("checked","document retrieve failed");
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("checked","name retrieve failed");
+            }
+        });
+
 
     }
 
@@ -194,6 +231,7 @@ public class ListBlogItem_Adapter extends RecyclerView.Adapter<RecyclerView.View
 
                         args.putString("BlogId",items.get(position).getBlogId());
                         args.putString("name",items.get(position).getOwnerName());
+                        args.putString(COMMENT_OWNER_NAME,commentOwnerName);
                         fragment.setArguments(args);
                         FragmentManager fragmentManager = ((FragmentActivity)viewHolderPic.commentImageButton.getContext()).getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -294,6 +332,7 @@ public class ListBlogItem_Adapter extends RecyclerView.Adapter<RecyclerView.View
 
                         args.putString("BlogId",items.get(position).getBlogId());
                         args.putString("name",items.get(position).getOwnerName());
+                        args.putString(COMMENT_OWNER_NAME,commentOwnerName);
                         fragment.setArguments(args);
                         FragmentManager fragmentManager = ((FragmentActivity)viewHolderNoPic.commentImageButton.getContext()).getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
