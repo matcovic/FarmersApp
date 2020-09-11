@@ -2,8 +2,14 @@ package com.example.farmersapp;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,6 +62,8 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,13 +72,15 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
+import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
+
 
 public class HomeFragment extends Fragment implements LocationListener {
   // TODO: Rename parameter arguments, choose names that match
   // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
-
+  private static final String WEATHER_DATA = "weather_data";
   /***
    * Firestore and widgets for Success_Stories View
    */
@@ -87,6 +97,7 @@ public class HomeFragment extends Fragment implements LocationListener {
   public static final long UPDATE_INTERVAL = 1;
   public static final long FASTEST_INTERVAL = 60000;
   private String LAT, LON;
+  private boolean connectionStatus;
 
   //widgets
   private Button learnMore;
@@ -138,6 +149,17 @@ public class HomeFragment extends Fragment implements LocationListener {
   @Override
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
+
+    ConnectivityManager connectivityManager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+    if ( connectivityManager.getActiveNetworkInfo() != null && connectivityManager.
+            getActiveNetworkInfo().isConnected() )
+    {
+      connectionStatus = true;
+    }
+    else
+    {
+      connectionStatus = false;
+    }
 
     fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
     if (ActivityCompat.checkSelfPermission(getActivity(),
@@ -284,85 +306,93 @@ public class HomeFragment extends Fragment implements LocationListener {
     @Override
     protected void onPostExecute(String result) {
 
+      if (connectionStatus) {
+        //Internet connected
+        try {
+          JSONObject jsonObj = new JSONObject(result);
+          JSONObject main = jsonObj.getJSONObject("main");
+          JSONObject sys = jsonObj.getJSONObject("sys");
+          JSONObject wind = jsonObj.getJSONObject("wind");
+          JSONObject weather = jsonObj.getJSONArray("weather").getJSONObject(0);
 
-      try {
-        JSONObject jsonObj = new JSONObject(result);
-        JSONObject main = jsonObj.getJSONObject("main");
-        JSONObject sys = jsonObj.getJSONObject("sys");
-        JSONObject wind = jsonObj.getJSONObject("wind");
-        JSONObject weather = jsonObj.getJSONArray("weather").getJSONObject(0);
+          Long updatedAt = jsonObj.getLong("dt");
+          String updatedAtText = "Updated at: " + new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(new Date(updatedAt * 1000));
+          String temp = digitConversionEngToBangla(conversionOfTemp(main.getString("temp"))) + "°";
+          String tempMin = digitConversionEngToBangla(conversionOfTemp(main.getString("temp_min"))) + "°";
+          String tempMax = digitConversionEngToBangla(conversionOfTemp(main.getString("temp_max"))) + " / ";
+          String pressure = main.getString("pressure");
+          String humidity = main.getString("humidity");
 
-        Long updatedAt = jsonObj.getLong("dt");
-        String updatedAtText = "Updated at: " + new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(new Date(updatedAt * 1000));
-        String temp = digitConversionEngToBangla(conversionOfTemp(main.getString("temp"))) + "°";
-        String tempMin = digitConversionEngToBangla(conversionOfTemp(main.getString("temp_min"))) + "°";
-        String tempMax = digitConversionEngToBangla(conversionOfTemp(main.getString("temp_max"))) + " / ";
-        String pressure = main.getString("pressure");
-        String humidity = main.getString("humidity");
+          Long sunrise = sys.getLong("sunrise");
+          Long sunset = sys.getLong("sunset");
+          String windSpeed = wind.getString("speed");
+          String weatherDescription = weather.getString("description");
 
-        Long sunrise = sys.getLong("sunrise");
-        Long sunset = sys.getLong("sunset");
-        String windSpeed = wind.getString("speed");
-        String weatherDescription = weather.getString("description");
+          String statusIcon = weather.getString("icon");
+          Log.d("test:", statusIcon);
+          String iconUrl = "https://openweathermap.org/img/wn/" +statusIcon+ "@2x.png";
+          Log.d("test:", iconUrl);
 
-        String statusIcon = weather.getString("icon");
-        Log.d("test:", statusIcon);
-        String iconUrl = "https://openweathermap.org/img/wn/" +statusIcon+ "@2x.png";
-        Log.d("test:", iconUrl);
+          String address = jsonObj.getString("name") + ", " + sys.getString("country");
 
-        String address = jsonObj.getString("name") + ", " + sys.getString("country");
-
-        /* Populating extracted data into our views */
-        addressTxt.setText(address);
-        updated_atTxt.setText(updatedAtText);
-
-        if(weatherDescription.equals("shower rain") || weatherDescription.equals("moderate rain") || weatherDescription.equals("very heavy rain")
-                || weatherDescription.equals("heavy intensity rain") || weatherDescription.equals("extreme rain"))
-          statusTxt.setText("প্রচণ্ড বৃষ্টি");
-        else if(weatherDescription.equals("rain") || weatherDescription.equals("light rain") || weatherDescription.equals("ragged shower rain") || weatherDescription.equals("light intensity shower rain"))
-          statusTxt.setText("বৃষ্টি");
-        else if(weatherDescription.equals("thunderstorm") || weatherDescription.equals("light thunderstorm") || weatherDescription.equals("thunderstorm with heavy drizzle")
-                || weatherDescription.equals("thunderstorm with rain") || weatherDescription.equals("thunderstorm with heavy rain")
-                || weatherDescription.equals("thunderstorm with light drizzle")  )
-          statusTxt.setText("প্রচণ্ড বজ্রপাত ও বৃষ্টি");
-        else if(weatherDescription.equals("mist"))
-          statusTxt.setText("কুয়াশাচ্ছন্ন");
-        else if(weatherDescription.equals("clear sky"))
-          statusTxt.setText("পরিষ্কার আকাশ");
-        else if(weatherDescription.equals("scattered clouds") || weatherDescription.equals("broken clouds") || weatherDescription.equals("few clouds")
-                || weatherDescription.equals("overcast clouds"))
-          statusTxt.setText("মেঘাচ্ছন্ন");
-        else if(weatherDescription.equals("drizzle") || weatherDescription.equals("drizzle rain") || weatherDescription.equals("shower drizzle")
-                || weatherDescription.equals("light intensity drizzle rain") || weatherDescription.equals("heavy intensity drizzle") || weatherDescription.equals("shower rain and drizzle")
-                || weatherDescription.equals("heavy shower rain and drizzle") || weatherDescription.equals("heavy intensity drizzle rain"))
-          statusTxt.setText("ঝরঝরে বৃষ্টি");
-        else
-          statusTxt.setText(weatherDescription.toUpperCase());
-
-        tempTxt.setText(temp);
-        temp_minTxt.setText(tempMin);
-        temp_maxTxt.setText(tempMax);
-        sunriseTxt.setText(new SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(new Date(sunrise * 1000)));
-        sunsetTxt.setText(new SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(new Date(sunset * 1000)));
-        windTxt.setText(windSpeed);
-        pressureTxt.setText(pressure);
-        humidityTxt.setText(humidity);
-
-        /***
-         * Load Image
-         */
-        Picasso.get().load(iconUrl).resize(200,200).into(weatherIcon);
-
-        /* Views populated, Hiding the loader, Showing the main design */
-       loader.setVisibility(View.GONE);
-        mainContainer.setVisibility(View.VISIBLE);
-       weather_Layout1.setVisibility(View.VISIBLE);
-        weather_Layout2.setVisibility(View.VISIBLE);
+          //Save data for offline uses
+         // SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(WEATHER_DATA, Context.MODE_PRIVATE);
 
 
-      } catch (JSONException e) {
-        loader.setVisibility(View.GONE);
-        errorText.setVisibility(View.VISIBLE);
+          /* Populating extracted data into our views */
+          addressTxt.setText(address);
+          updated_atTxt.setText(updatedAtText);
+
+          if(weatherDescription.equals("shower rain") || weatherDescription.equals("moderate rain") || weatherDescription.equals("very heavy rain")
+                  || weatherDescription.equals("heavy intensity rain") || weatherDescription.equals("extreme rain"))
+            statusTxt.setText("প্রচণ্ড বৃষ্টি");
+          else if(weatherDescription.equals("rain") || weatherDescription.equals("light rain") || weatherDescription.equals("ragged shower rain") || weatherDescription.equals("light intensity shower rain"))
+            statusTxt.setText("বৃষ্টি");
+          else if(weatherDescription.equals("thunderstorm") || weatherDescription.equals("light thunderstorm") || weatherDescription.equals("thunderstorm with heavy drizzle")
+                  || weatherDescription.equals("thunderstorm with rain") || weatherDescription.equals("thunderstorm with heavy rain")
+                  || weatherDescription.equals("thunderstorm with light drizzle")  )
+            statusTxt.setText("প্রচণ্ড বজ্রপাত ও বৃষ্টি");
+          else if(weatherDescription.equals("mist"))
+            statusTxt.setText("কুয়াশাচ্ছন্ন");
+          else if(weatherDescription.equals("haze"))
+            statusTxt.setText("আবছায়া");
+          else if(weatherDescription.equals("clear sky"))
+            statusTxt.setText("পরিষ্কার আকাশ");
+          else if(weatherDescription.equals("scattered clouds") || weatherDescription.equals("broken clouds") || weatherDescription.equals("few clouds")
+                  || weatherDescription.equals("overcast clouds"))
+            statusTxt.setText("মেঘাচ্ছন্ন");
+          else if(weatherDescription.equals("drizzle") || weatherDescription.equals("drizzle rain") || weatherDescription.equals("shower drizzle")
+                  || weatherDescription.equals("light intensity drizzle rain") || weatherDescription.equals("heavy intensity drizzle") || weatherDescription.equals("shower rain and drizzle")
+                  || weatherDescription.equals("heavy shower rain and drizzle") || weatherDescription.equals("heavy intensity drizzle rain"))
+            statusTxt.setText("ঝরঝরে বৃষ্টি");
+          else
+            statusTxt.setText(weatherDescription.toUpperCase());
+
+          tempTxt.setText(temp);
+          temp_minTxt.setText(tempMin);
+          temp_maxTxt.setText(tempMax);
+          sunriseTxt.setText(new SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(new Date(sunrise * 1000)));
+          sunsetTxt.setText(new SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(new Date(sunset * 1000)));
+          windTxt.setText(windSpeed);
+          pressureTxt.setText(pressure);
+          humidityTxt.setText(humidity);
+
+          /***
+           * Load Image
+           */
+          Picasso.get().load(iconUrl).resize(200,200).into(weatherIcon);
+
+          /* Views populated, Hiding the loader, Showing the main design */
+          loader.setVisibility(View.GONE);
+          mainContainer.setVisibility(View.VISIBLE);
+          weather_Layout1.setVisibility(View.VISIBLE);
+          weather_Layout2.setVisibility(View.VISIBLE);
+
+
+        } catch (JSONException e) {
+          loader.setVisibility(View.GONE);
+          errorText.setVisibility(View.VISIBLE);
+        }
       }
     }
 
