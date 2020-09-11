@@ -77,6 +77,16 @@ public class Cultivation_Disease_DetailsFragment extends Fragment {
         diseaseBiologicalControl_details = convertView.findViewById(R.id.diseaseBiologicalControl_details);
         diseaseImage_details = convertView.findViewById(R.id.diseaseImage_details);
 
+        CustomListItem_Diseases customListItem_diseases = getArguments().getParcelable(DataLoadActivity.DATA_DISEASE);
+
+        diseaseTitle_details.setText(customListItem_diseases.getDiseaseTitle());
+        diseaseType_details.setText(customListItem_diseases.getDiseaseType());
+        diseaseScienteficName_details.setText(customListItem_diseases.getDiseaseScientificName());
+        diseaseBrief_details.setText(customListItem_diseases.getDiseaseBrief());
+        diseaseCause_details.setText(customListItem_diseases.getDiseaseCause());
+        diseaseChemicalControl_details.setText(customListItem_diseases.getDiseaseChemicalControl());
+        diseaseBiologicalControl_details.setText(customListItem_diseases.getDiseaseBiologicalControl());
+
         byte[] decodedByte = Base64.decode(mData.getDiseasePhoto(), 0);
         Bitmap bmp = BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
       diseaseImage_details.setImageBitmap(bmp);
