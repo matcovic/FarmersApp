@@ -19,10 +19,13 @@ import com.example.farmersapp.adapter.ListBlogItem_Adapter;
 import com.example.farmersapp.model.BlogItem;
 import com.example.farmersapp.model.CommentItem;
 import com.example.farmersapp.model.CommentItemDetails;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -82,6 +85,7 @@ public class CommentsFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
             blogId = getArguments().getString(ARG_Blog);
            blogOwnerName = getArguments().getString(ARG_OWNER_NAME);
+           ownerName =getArguments().getString(ListBlogItem_Adapter.COMMENT_OWNER_NAME);
 
 
         }
@@ -111,28 +115,14 @@ public class CommentsFragment extends Fragment {
                     editTextComment.setError("Enter comment.");
                 } else {
 
-                    CommentItemDetails newComment = new CommentItemDetails(mAuth.getUid(), editTextComment.getText().toString(), ownerName, blogId);
+                    final CommentItemDetails newComment = new CommentItemDetails(mAuth.getUid(), editTextComment.getText().toString(), ownerName, blogId);
 
-//                    collectionReferenceBlog.document(blogId).update("commentList", FieldValue.arrayUnion(newComment));
-
-
-                    Map<String, String> newData = new HashMap<>();
-                    usersCollectionRef.document(mAuth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            ownerName = (String) documentSnapshot.get("name");
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                        }
-                    });
+                     Map<String, String> newData = new HashMap<>();
                     newData.put("name", ownerName);
                     newData.put("comment", editTextComment.getText().toString());
                     newData.put("userId", mAuth.getUid());
                     newData.put("blogId", blogId);
+
 
 
                     collectionReferenceComment.document(blogId).update("commentList", FieldValue.arrayUnion(newComment));
@@ -142,6 +132,7 @@ public class CommentsFragment extends Fragment {
 
                     adapter.notifyDataSetChanged();
                     recyclerViewComment.setAdapter(adapter);
+
                     editTextComment.setText("");
 
                     collectionReferenceBlog.document(blogId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
