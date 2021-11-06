@@ -3,11 +3,6 @@
 ## CSE2200 : Software Development-III, Fall 2019
 ## Year: 2nd Semester: 2nd
 
-## Group Members
-#### Name: Fahim Shahriyar ID: 180104001
-#### Name: Shahriar Badhon ID: 180104004
-#### Name: S,S,Saruar jahan ID: 180104008
-
 ## Project Description
 We want to make a platform where we can solve any kind of agricultural
 problems of farmers. Our vision is to make our farmer to work smarter
