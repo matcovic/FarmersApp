@@ -1,13 +1,5 @@
 # Project Name: Farmer’s App
 
-## CSE2200 : Software Development-III, Fall 2019
-## Year: 2nd Semester: 2nd
-
-## Project Description
-We want to make a platform where we can solve any kind of agricultural
-problems of farmers. Our vision is to make our farmer to work smarter
-and this project is first to step to that vision.
-
 ## Software Specifications
 Minimum SDK Version: 23
 * Android Version: 6.0 (Marshmallow)
@@ -56,11 +48,11 @@ necessary information and mark their location on map.
 wants to hire. Afterwards a list of available selected vehicle
 type around the user’s location will be shown on the map.
 
-## Contribution
-• Complete app front-end design
+## Screenshots
+Some of this data is mocked
+| ![345887010_565584532367587_2293861473592917281_n](https://github.com/matcovic/FarmersApp/assets/49493045/e2d20a0c-81b3-4bed-8f08-85263dcaa340) | ![346055861_213689101412850_3600351090265353576_n](https://github.com/matcovic/FarmersApp/assets/49493045/7c10791c-e2cf-4758-afe8-d060970e5cd0)                            
+| ----------------------------------- | ----------------------------------- | 
+| ![345900828_3518841178429439_6234740745448878494_n](https://github.com/matcovic/FarmersApp/assets/49493045/1e45e2f8-53a7-4ab9-baa4-8c9438feb835) | ![345871366_552469823702838_1539168902376585513_n](https://github.com/matcovic/FarmersApp/assets/49493045/5fc11400-8ef0-49b7-aad5-d72b7db6c815) |
+| ![345866179_1518167968991636_6215107197109396880_n](https://github.com/matcovic/FarmersApp/assets/49493045/813d42e0-45b5-4b04-87d7-4d76e55b9be9) | ![345939568_259348309990018_1189524015546620936_n](https://github.com/matcovic/FarmersApp/assets/49493045/db3dd313-e111-41cc-9cad-44076337bd8e) |
 
-• Integrated Weather API and Google Maps API 
 
-• Complete back-end of Weather and Vehicle Renting feature
-
-• CRUD operations of Cloud Firestore
