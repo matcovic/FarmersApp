@@ -54,5 +54,7 @@ Some of this data is mocked
 | ----------------------------------- | ----------------------------------- | 
 | ![345900828_3518841178429439_6234740745448878494_n](https://github.com/matcovic/FarmersApp/assets/49493045/1e45e2f8-53a7-4ab9-baa4-8c9438feb835) | ![345871366_552469823702838_1539168902376585513_n](https://github.com/matcovic/FarmersApp/assets/49493045/5fc11400-8ef0-49b7-aad5-d72b7db6c815) |
 | ![345866179_1518167968991636_6215107197109396880_n](https://github.com/matcovic/FarmersApp/assets/49493045/813d42e0-45b5-4b04-87d7-4d76e55b9be9) | ![345939568_259348309990018_1189524015546620936_n](https://github.com/matcovic/FarmersApp/assets/49493045/db3dd313-e111-41cc-9cad-44076337bd8e) |
+| ![0](https://github.com/matcovic/FarmersApp/assets/49493045/31a30d35-1caa-4644-acb0-fa7a6e255c1e) | ![1](https://github.com/matcovic/FarmersApp/assets/49493045/1f08fbcc-d7ed-4da9-bd52-4169d53eef48) |
+| ![2](https://github.com/matcovic/FarmersApp/assets/49493045/fa2fc425-6d96-4105-9c4b-7cbe287a4b60) | ![3](https://github.com/matcovic/FarmersApp/assets/49493045/6cec4c88-68d8-4281-845b-ead11b6348d4) |
 
 
